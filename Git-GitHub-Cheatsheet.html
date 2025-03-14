@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Reference Guide</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .command-container {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .command-text {
+            flex-grow: 1;
+            margin-right: 10px;
+            font-family: monospace;
+            color: #333;
+        }
+
+        .copy-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+
+        .tip {
+            background: #e8f4fc;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            color: #666;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        ol li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Git & GitHub Reference Guide</h1>
+        <p>This guide compiles essential Git commands and workflows from multiple sources, presented in simple, clear steps. Use these commands directly in your terminal.</p>
+
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#installation"> Installation & Setup</a></li>
+            <li><a href="#basic"> Basic Commands</a></li>
+            <li><a href="#branching">Branching & Merging</a></li>
+            <li><a href="#remote"> Remote Repositories</a></li>
+            <li><a href="#advanced"> Advanced Commands</a></li>
+            <li><a href="#workflow"> Feature Branch Workflow</a></li>
+            <li><a href="#resources"> Learning Resources</a></li>
+            <li><a href="#best-practices"> Best Practices</a></li>
+        </ol>
+
+        <div class="section" id="installation">
+            <h2>1. Installation & Setup</h2>
+            <h3>Installation</h3>
+            <ul>
+                <li><strong>GitHub for Windows:</strong> <a href="https://windows.github.com">https://windows.github.com</a></li>
+                <li><strong>GitHub for Mac:</strong> <a href="https://mac.github.com">https://mac.github.com</a></li>
+                <li><strong>Git for All Platforms:</strong> <a href="http://git-scm.com">http://git-scm.com</a></li>
+            </ul>
+            <h3>Configuration</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git config --global user.name "Your Name"</span> – Set your name for commit credits.<button class="copy-btn" data-text='git config --global user.name "Your Name"'>Copy</button></li>
+                <li class="command-container"><span class="command-text">git config --global user.email "email@example.com"</span> – Set your email for commit association.<button class="copy-btn" data-text='git config --global user.email "email@example.com"'>Copy</button></li>
+                <li class="command-container"><span class="command-text">git config --global color.ui auto</span> – Enable command line coloring.<button class="copy-btn" data-text="git config --global color.ui auto">Copy</button></li>
+            </ul>
+            <h3>Initialize & Clone</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git init</span> – Initialize a Git repository in the current directory.<button class="copy-btn" data-text="git init">Copy</button></li>
+                <li class="command-container"><span class="command-text">git clone [url]</span> – Clone a repository from a URL (e.g., git clone https://github.com/user/repo.git).<button class="copy-btn" data-text="git clone [url]">Copy</button></li>
+            </ul>
+        </div>
+
+        <div class="section" id="basic">
+            <h2>2. Basic Commands</h2>
+            <h3>Stage & Snapshot</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git status</span> – Show modified files in the working directory.<button class="copy-btn" data-text="git status">Copy</button></li>
+                <li class="command-container"><span class="command-text">git add [file]</span> – Stage a specific file.<button class="copy-btn" data-text="git add [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git add .</span> – Stage all changes in the current directory.<button class="copy-btn" data-text="git add .">Copy</button></li>
+                <li class="command-container"><span class="command-text">git reset [file]</span> – Unstage a file, keeping changes in the working directory.<button class="copy-btn" data-text="git reset [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git diff</span> – Show unstaged changes.<button class="copy-btn" data-text="git diff">Copy</button></li>
+                <li class="command-container"><span class="command-text">git diff --staged</span> – Show staged changes not yet committed.<button class="copy-btn" data-text="git diff --staged">Copy</button></li>
+                <li class="command-container"><span class="command-text">git commit -m "message"</span> – Commit staged changes with a message.<button class="copy-btn" data-text='git commit -m "message"'>Copy</button></li>
+                <li class="command-container"><span class="command-text">git commit -m "message" --amend</span> – Update the previous commit.<button class="copy-btn" data-text='git commit -m "message" --amend'>Copy</button></li>
+            </ul>
+            <h3>Inspect & Compare</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git log</span> – Show commit history.<button class="copy-btn" data-text="git log">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log --all</span> – Show all commits across branches.<button class="copy-btn" data-text="git log --all">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log --all --graph</span> – Visualize branching history.<button class="copy-btn" data-text="git log --all --graph">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log branchB..branchA</span> – Show commits in branchA not in branchB.<button class="copy-btn" data-text="git log branchB..branchA">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log --follow [file]</span> – Show commit history for a file, including renames.<button class="copy-btn" data-text="git log --follow [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git diff branchB...branchA</span> – Compare differences between branches.<button class="copy-btn" data-text="git diff branchB...branchA">Copy</button></li>
+                <li class="command-container"><span class="command-text">git show [SHA]</span> – Display details of a specific commit.<button class="copy-btn" data-text="git show [SHA]">Copy</button></li>
+            </ul>
+        </div>
+
+        <div class="section" id="branching">
+            <h2>3. Branching & Merging</h2>
+            <h3>Branch Commands</h3>
+            <h4>Create, List, and Delete Branches</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git branch</span> – List all local branches (active branch marked with *).<button class="copy-btn" data-text="git branch">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch <branch_name></span> – Create a new branch.<button class="copy-btn" data-text="git branch <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch -a</span> – List all branches (local & remote).<button class="copy-btn" data-text="git branch -a">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch -r</span> – List only remote branches.<button class="copy-btn" data-text="git branch -r">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch -d <branch_name></span> – Delete a branch (safe deletion).<button class="copy-btn" data-text="git branch -d <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch -D <branch_name></span> – Force delete a branch.<button class="copy-btn" data-text="git branch -D <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch --move <old> <new></span> – Rename a branch.<button class="copy-btn" data-text="git branch --move <old> <new>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git show-branch</span> – Show branch history.<button class="copy-btn" data-text="git show-branch">Copy</button></li>
+                <li class="command-container"><span class="command-text">git checkout -b <branch_name></span> – Create and switch to a new branch.<button class="copy-btn" data-text="git checkout -b <branch_name>">Copy</button></li>
+            </ul>
+            <h4>Switch Between Branches</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git checkout <branch_name></span> – Switch to a branch (older method).<button class="copy-btn" data-text="git checkout <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git switch <branch_name></span> – Switch branch (recommended).<button class="copy-btn" data-text="git switch <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git switch -c <branch_name></span> – Create and switch to a new branch.<button class="copy-btn" data-text="git switch -c <branch_name>">Copy</button></li>
+            </ul>
+            <h3>Merge Commands</h3>
+            <h4>Merging Branches</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git merge <branch_name></span> – Merge specified branch into the current branch.<button class="copy-btn" data-text="git merge <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git merge --no-ff <branch_name></span> – Merge with a commit (no fast-forward).<button class="copy-btn" data-text="git merge --no-ff <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git merge --abort</span> – Abort a merge if conflicts arise.<button class="copy-btn" data-text="git merge --abort">Copy</button></li>
+                <li class="command-container"><span class="command-text">git merge --squash <branch></span> – Squash multiple commits into one before merging.<button class="copy-btn" data-text="git merge --squash <branch>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git merge <branch> -m "message"</span> – Merge with a commit message.<button class="copy-btn" data-text='git merge <branch> -m "message"'>Copy</button></li>
+            </ul>
+            <div class="tip">
+                💡 <strong>Merge Conflict Resolution:</strong> Edit conflicting files to keep desired code, then run git add . and git commit -m "Resolve merge conflict". 🚀
+            </div>
+        </div>
+
+        <div class="section" id="remote">
+            <h2>4. Remote Repositories</h2>
+            <ul>
+                <li class="command-container"><span class="command-text">git remote add [alias] [url]</span> – Add a remote repository (e.g., git remote add origin https://github.com/user/repo.git).<button class="copy-btn" data-text="git remote add [alias] [url]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git remote</span> – List remote repositories.<button class="copy-btn" data-text="git remote">Copy</button></li>
+                <li class="command-container"><span class="command-text">git remote -v</span> – List remotes with URLs (verbose mode).<button class="copy-btn" data-text="git remote -v">Copy</button></li>
+                <li class="command-container"><span class="command-text">git remote remove [alias]</span> – Remove a remote.<button class="copy-btn" data-text="git remote remove [alias]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git fetch [alias]</span> – Fetch all branches from a remote.<button class="copy-btn" data-text="git fetch [alias]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git branch --track <local_branch> <remote/branch></span> – Track a remote branch locally.<button class="copy-btn" data-text="git branch --track <local_branch> <remote/branch>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git fetch --all</span> – Fetch all remote branches.<button class="copy-btn" data-text="git fetch --all">Copy</button></li>
+                <li class="command-container"><span class="command-text">git pull origin <branch></span> – Pull latest changes from a remote branch.<button class="copy-btn" data-text="git pull origin <branch>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git pull origin main --allow-unrelated-histories</span> – Pull from main, allowing unrelated histories to merge.<button class="copy-btn" data-text="git pull origin main --allow-unrelated-histories">Copy</button></li>
+                <li class="command-container"><span class="command-text">git push [alias] [branch]</span> – Push a branch to a remote.<button class="copy-btn" data-text="git push [alias] [branch]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git push [alias] [branch] --set-upstream</span> – Push and set upstream tracking.<button class="copy-btn" data-text="git push [alias] [branch] --set-upstream">Copy</button></li>
+                <li class="command-container"><span class="command-text">git push [alias] [branch] -f</span> – Force push (overwrites remote).<button class="copy-btn" data-text="git push [alias] [branch] -f">Copy</button></li>
+                <li class="command-container"><span class="command-text">git push origin --delete <branch_name></span> – Delete a remote branch.<button class="copy-btn" data-text="git push origin --delete <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git pull</span> – Fetch and merge from the tracking remote branch.<button class="copy-btn" data-text="git pull">Copy</button></li>
+            </ul>
+        </div>
+
+        <div class="section" id="advanced">
+            <h2>5. Advanced Commands</h2>
+            <h3>Tracking Path Changes</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git rm [file]</span> – Remove a file and stage the deletion.<button class="copy-btn" data-text="git rm [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git mv [existing-path] [new-path]</span> – Rename/move a file and stage it.<button class="copy-btn" data-text="git mv [existing-path] [new-path]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log --stat -M</span> – Show commit logs with moved paths.<button class="copy-btn" data-text="git log --stat -M">Copy</button></li>
+            </ul>
+            <h3>Rewrite History</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git rebase <branch_name></span> – Reapply commits on top of another branch.<button class="copy-btn" data-text="git rebase <branch_name>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git rebase --abort</span> – Abort a rebase.<button class="copy-btn" data-text="git rebase --abort">Copy</button></li>
+                <li class="command-container"><span class="command-text">git rebase --continue</span> – Continue after resolving conflicts.<button class="copy-btn" data-text="git rebase --continue">Copy</button></li>
+                <li class="command-container"><span class="command-text">git rebase -i HEAD~<num></span> – Interactive rebase to modify commit history.<button class="copy-btn" data-text="git rebase -i HEAD~<num>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git reset --hard [commit]</span> – Reset to a commit, discarding changes.<button class="copy-btn" data-text="git reset --hard [commit]">Copy</button></li>
+            </ul>
+            <h3>Temporary Commits</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git stash</span> – Stash modified tracked files.<button class="copy-btn" data-text="git stash">Copy</button></li>
+                <li class="command-container"><span class="command-text">git stash list</span> – List stashed changes.<button class="copy-btn" data-text="git stash list">Copy</button></li>
+                <li class="command-container"><span class="command-text">git stash pop</span> – Apply and remove the latest stash.<button class="copy-btn" data-text="git stash pop">Copy</button></li>
+                <li class="command-container"><span class="command-text">git stash drop</span> – Discard the latest stash.<button class="copy-btn" data-text="git stash drop">Copy</button></li>
+            </ul>
+            <h3>Handling Merge Conflicts</h3>
+            <h4>Identify Conflicts</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git status</span> – Check for merge conflicts.<button class="copy-btn" data-text="git status">Copy</button></li>
+                <li class="command-container"><span class="command-text">git diff</span> – Show differences in conflicting files.<button class="copy-btn" data-text="git diff">Copy</button></li>
+                <li class="command-container"><span class="command-text">git log --merge</span> – Show commits causing conflicts.<button class="copy-btn" data-text="git log --merge">Copy</button></li>
+            </ul>
+            <h4>Resolve Conflicts</h4>
+            <ul>
+                <li>Manually edit conflicting files to fix markers (<<<<<<<, =======, >>>>>>>)</li>
+                <li class="command-container"><span class="command-text">git add <conflicted_file></span> – Mark conflict as resolved.<button class="copy-btn" data-text="git add <conflicted_file>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git commit</span> – Commit the resolution.<button class="copy-btn" data-text="git commit">Copy</button></li>
+            </ul>
+            <h4>Abort or Reset Merge</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git merge --abort</span> – Cancel the merge.<button class="copy-btn" data-text="git merge --abort">Copy</button></li>
+                <li class="command-container"><span class="command-text">git reset --hard HEAD</span> – Reset to last committed state.<button class="copy-btn" data-text="git reset --hard HEAD">Copy</button></li>
+            </ul>
+            <h4>Advanced Conflict Resolution</h4>
+            <ul>
+                <li class="command-container"><span class="command-text">git checkout --ours <file></span> – Keep changes from current branch.<button class="copy-btn" data-text="git checkout --ours <file>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git checkout --theirs <file></span> – Keep changes from merged branch.<button class="copy-btn" data-text="git checkout --theirs <file>">Copy</button></li>
+                <li class="command-container"><span class="command-text">git reset --merge</span> – Undo merge but keep local changes.<button class="copy-btn" data-text="git reset --merge">Copy</button></li>
+            </ul>
+            <h3>Other Utilities</h3>
+            <ul>
+                <li class="command-container"><span class="command-text">git checkout -- [file]</span> – Discard changes in a file.<button class="copy-btn" data-text="git checkout -- [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git checkout [hash|branch] [file]</span> – Restore a file from a commit.<button class="copy-btn" data-text="git checkout [hash|branch] [file]">Copy</button></li>
+                <li class="command-container"><span class="command-text">git config --global alias.shortcut "command"</span> – Create a command alias (e.g., git config --global alias.s "status").<button class="copy-btn" data-text='git config --global alias.shortcut "command"'>Copy</button></li>
+                <li class="command-container"><span class="command-text">rm -rf .git</span> – Remove Git from a project.<button class="copy-btn" data-text="rm -rf .git">Copy</button></li>
+            </ul>
+            <h3>Ignoring Files</h3>
+            <p>Create a .gitignore file with patterns like: logs/, *.notes, pattern*/</p>
+            <ul>
+                <li class="command-container"><span class="command-text">git config --global core.excludesfile [file]</span> – Set a global ignore file.<button class="copy-btn" data-text="git config --global core.excludesfile [file]">Copy</button></li>
+            </ul>
+        </div>
+
+        <div class="section" id="workflow">
+            <h2>6. Feature Branch Workflow</h2>
+            <ol>
+                <li><strong>Create a Feature Branch:</strong>
+                    <div class="command-container"><span class="command-text">git branch new-feature</span><button class="copy-btn" data-text="git branch new-feature">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git checkout new-feature</span><button class="copy-btn" data-text="git checkout new-feature">Copy</button></div>
+                </li>
+                <li><strong>Make Changes & Commit:</strong>
+                    <div class="command-container"><span class="command-text">git add .</span><button class="copy-btn" data-text="git add .">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git commit -m "new feature message"</span><button class="copy-btn" data-text='git commit -m "new feature message"'>Copy</button></div>
+                </li>
+                <li><strong>Push to GitHub:</strong>
+                    <div class="command-container"><span class="command-text">git push origin new-feature</span><button class="copy-btn" data-text="git push origin new-feature">Copy</button></div>
+                </li>
+                <li><strong>Create a Pull Request:</strong> On GitHub, open a pull request for review.</li>
+                <li><strong>Merge into Main:</strong> After approval, merge via GitHub.</li>
+                <li><strong>Sync Local Repository:</strong>
+                    <div class="command-container"><span class="command-text">git checkout main</span><button class="copy-btn" data-text="git checkout main">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git pull origin main</span><button class="copy-btn" data-text="git pull origin main">Copy</button></div>
+                </li>
+            </ol>
+            <h3>Handling Merge Conflicts</h3>
+            <ol>
+                <li><strong>Update Main:</strong>
+                    <div class="command-container"><span class="command-text">git checkout main</span><button class="copy-btn" data-text="git checkout main">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git pull origin main</span><button class="copy-btn" data-text="git pull origin main">Copy</button></div>
+                </li>
+                <li><strong>Update Feature Branch:</strong>
+                    <div class="command-container"><span class="command-text">git checkout new-feature</span><button class="copy-btn" data-text="git checkout new-feature">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git pull origin new-feature</span><button class="copy-btn" data-text="git pull origin new-feature">Copy</button></div>
+                </li>
+                <li><strong>Merge Main into Feature:</strong>
+                    <div class="command-container"><span class="command-text">git merge main</span><button class="copy-btn" data-text="git merge main">Copy</button></div>
+                </li>
+                <li><strong>Resolve Conflicts:</strong> Edit files, then
+                    <div class="command-container"><span class="command-text">git add .</span><button class="copy-btn" data-text="git add .">Copy</button></div>
+                    <div class="command-container"><span class="command-text">git commit -m "resolve conflicts"</span><button class="copy-btn" data-text='git commit -m "resolve conflicts"'>Copy</button></div>
+                </li>
+                <li><strong>Push:</strong>
+                    <div class="command-container"><span class="command-text">git push origin new-feature</span><button class="copy-btn" data-text="git push origin new-feature">Copy</button></div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section" id="resources">
+            <h2>7. Learning Resources</h2>
+            <ul>
+                
+                <li><strong>Codebasics Playlist:</strong> <a href="https://www.youtube.com/playlist?list=PLeo1K3hjS3usJuxZZUBdjAcilgfQHkRzW">Git & GitHub Tutorials</a></li>
+                <li><strong>In-Depth Git Tutorial (Kunal Kushwaha):</strong> <a href="https://youtu.be/apGV9Kg7ics?si=o6KoFjJ1-B8O1omi">Learn Git in Depth</a></li>
+                <li><strong>Meta Certification Course:</strong> <a href="https://www.coursera.org/learn/introduction-to-version-control">Introduction to Version Control</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="best-practices">
+            <h2>8. Best Practices</h2>
+            <ul>
+                <li>Write clear, descriptive commit messages.</li>
+                <li>Use branches to isolate features and fixes.</li>
+                <li>Regularly pull updates to stay in sync.</li>
+                <li>Use .gitignore to exclude unnecessary files.</li>
+                <li>Review pull requests carefully before merging.</li>
+                <li>Avoid force pushes unless necessary.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Created with ❤️ by <strong>Muhammad Zafar Ul Haq</strong> | Updated: March 14, 2025</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const textToCopy = button.getAttribute('data-text');
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    button.textContent = 'Copied!';
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
