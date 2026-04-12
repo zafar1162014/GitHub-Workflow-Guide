@@ -13,7 +13,7 @@ Author: Muhammad Zafar Ul Haq
 
 ## Why This Guide
 
-- Beginner-friendly, fast to scan.
+- Beginner-friendly and fast to scan.
 - Useful for developers, students, and teams.
 - Includes real workflow steps, not just isolated commands.
 - Covers merge/rebase conflict handling in detail.
@@ -22,12 +22,13 @@ Author: Muhammad Zafar Ul Haq
 
 - [Installation](#installation)
 - [Git Setup](#git-setup)
+- [Quick Start Workflow](#quick-start-workflow)
 - [Create and Clone Repositories](#create-and-clone-repositories)
 - [Daily Git Commands](#daily-git-commands)
-- [Inspect and Compare Changes](#inspect-and-compare-changes)
-- [Undo and Restore](#undo-and-restore)
 - [Branching and Merging](#branching-and-merging)
 - [Sharing and Syncing with Remote](#sharing-and-syncing-with-remote)
+- [Inspect and Compare Changes](#inspect-and-compare-changes)
+- [Undo and Restore](#undo-and-restore)
 - [In-Depth Feature Workflow](#in-depth-feature-workflow)
 - [Merge Conflict Resolution (A to Z)](#merge-conflict-resolution-a-to-z)
 - [Copy-Ready Command Bundles](#copy-ready-command-bundles)
@@ -49,12 +50,43 @@ Author: Muhammad Zafar Ul Haq
 | Configure author name | `git config --global user.name "<username>"` |
 | Configure author email | `git config --global user.email <email address>` |
 
+### Individual Copy Commands
+
+```bash
+git config --global user.name "<username>"
+```
+
+```bash
+git config --global user.email <email address>
+```
+
+## Quick Start Workflow
+
+```bash
+git clone ssh://git@github.com/<username>/<repository-name>.git
+cd <repository-name>
+git checkout -b feature/<short-name>
+git add -A
+git commit -m "feat: add <change>"
+git push -u origin feature/<short-name>
+```
+
 ## Create and Clone Repositories
 
 | Description | Command |
 | --- | --- |
 | Initialize local repository | `git init` |
 | Clone repository via SSH | `git clone ssh://git@github.com/<username>/<repository-name>.git` |
+
+### Individual Copy Commands
+
+```bash
+git init
+```
+
+```bash
+git clone ssh://git@github.com/<username>/<repository-name>.git
+```
 
 ## Daily Git Commands
 
@@ -66,26 +98,31 @@ Author: Muhammad Zafar Ul Haq
 | Commit changes | `git commit -m "<commit message>"` |
 | Remove file/folder | `git rm -r <file-name.txt>` |
 
-## Inspect and Compare Changes
+### Individual Copy Commands
 
-| Description | Command |
-| --- | --- |
-| Commit history | `git log` |
-| Detailed history | `git log --summary` |
-| One-line history | `git log --oneline` |
-| Alternative one-line style | `git log --pretty=oneline` |
-| Short style history | `git log --pretty=short` |
+```bash
+git status
+```
 
-## Undo and Restore
+```bash
+git add <file-name.txt>
+```
 
-| Description | Command |
-| --- | --- |
-| List commits quickly | `git log --oneline` |
-| Checkout old commit | `git checkout <commit id>` |
-| Revert a commit safely | `git revert <commit id>` |
-| Hard reset to commit | `git reset --hard <commit id>` |
-| Stop tracking file/folder | `git rm --cached <file/folder>` |
-| Restore file from Git | `git checkout <file/to/restore>` |
+```bash
+git add -A
+```
+
+```bash
+git add .
+```
+
+```bash
+git commit -m "<commit message>"
+```
+
+```bash
+git rm -r <file-name.txt>
+```
 
 ## Branching and Merging
 
@@ -108,6 +145,72 @@ Author: Muhammad Zafar Ul Haq
 | Stash current work | `git stash` |
 | Clear all stash entries | `git stash clear` |
 
+### Individual Copy Commands
+
+```bash
+git branch
+```
+
+```bash
+git branch -a
+```
+
+```bash
+git branch <branch name>
+```
+
+```bash
+git checkout -b <branch name>
+```
+
+```bash
+git checkout -b <branch name> origin/<branch name>
+```
+
+```bash
+git branch -m <old branch name> <new branch name>
+```
+
+```bash
+git checkout <branch name>
+```
+
+```bash
+git checkout -
+```
+
+```bash
+git checkout -- <file-name.txt>
+```
+
+```bash
+git branch -d <branch name>
+```
+
+```bash
+git push origin --delete <branch name>
+```
+
+```bash
+git diff <source branch> <target branch>
+```
+
+```bash
+git merge <branch name>
+```
+
+```bash
+git merge <source branch> <target branch>
+```
+
+```bash
+git stash
+```
+
+```bash
+git stash clear
+```
+
 ## Sharing and Syncing with Remote
 
 | Description | Command |
@@ -122,6 +225,117 @@ Author: Muhammad Zafar Ul Haq
 | Pull specific branch | `git pull origin <branch name>` |
 | Add remote origin | `git remote add origin ssh://git@github.com/<username>/<repository-name>.git` |
 | Switch origin to SSH URL | `git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git` |
+
+### Individual Copy Commands
+
+```bash
+git push origin <branch name>
+```
+
+```bash
+git push -u origin <branch name>
+```
+
+```bash
+git push
+```
+
+```bash
+git push --all
+```
+
+```bash
+git push -f
+```
+
+```bash
+git push origin --delete <branch name>
+```
+
+```bash
+git pull
+```
+
+```bash
+git pull origin <branch name>
+```
+
+```bash
+git remote add origin ssh://git@github.com/<username>/<repository-name>.git
+```
+
+```bash
+git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git
+```
+
+## Inspect and Compare Changes
+
+| Description | Command |
+| --- | --- |
+| Commit history | `git log` |
+| Detailed history | `git log --summary` |
+| One-line history | `git log --oneline` |
+| Alternative one-line style | `git log --pretty=oneline` |
+| Short style history | `git log --pretty=short` |
+
+### Individual Copy Commands
+
+```bash
+git log
+```
+
+```bash
+git log --summary
+```
+
+```bash
+git log --oneline
+```
+
+```bash
+git log --pretty=oneline
+```
+
+```bash
+git log --pretty=short
+```
+
+## Undo and Restore
+
+| Description | Command |
+| --- | --- |
+| List commits quickly | `git log --oneline` |
+| Checkout old commit | `git checkout <commit id>` |
+| Revert a commit safely | `git revert <commit id>` |
+| Hard reset to commit | `git reset --hard <commit id>` |
+| Stop tracking file/folder | `git rm --cached <file/folder>` |
+| Restore file from Git | `git checkout <file/to/restore>` |
+
+### Individual Copy Commands
+
+```bash
+git log --oneline
+```
+
+```bash
+git checkout <commit id>
+```
+
+```bash
+git revert <commit id>
+```
+
+```bash
+git reset --hard <commit id>
+```
+
+```bash
+git rm --cached <file/folder>
+```
+
+```bash
+git checkout <file/to/restore>
+```
 
 ## In-Depth Feature Workflow
 
@@ -187,6 +401,60 @@ git push origin --delete feature/<short-name>
 | Continue rebase | `git rebase --continue` |
 | Skip one patch in rebase | `git rebase --skip` |
 | Abort rebase | `git rebase --abort` |
+
+### Individual Copy Commands
+
+```bash
+git status
+```
+
+```bash
+git diff --name-only --diff-filter=U
+```
+
+```bash
+git diff
+```
+
+```bash
+git log --merge --oneline
+```
+
+```bash
+git checkout --ours <file>
+```
+
+```bash
+git checkout --theirs <file>
+```
+
+```bash
+git mergetool
+```
+
+```bash
+git add <file>
+```
+
+```bash
+git commit -m "resolve: merge conflicts"
+```
+
+```bash
+git merge --abort
+```
+
+```bash
+git rebase --continue
+```
+
+```bash
+git rebase --skip
+```
+
+```bash
+git rebase --abort
+```
 
 ### Merge Conflict Fast Flow
 
@@ -270,9 +538,9 @@ git checkout <file/to/restore>
 To help this repository rank higher in search results on GitHub and Google:
 
 - Keep repository name and README title aligned with target keywords:
-	Git, GitHub, workflow, cheatsheet, merge conflict, branching.
+  Git, GitHub, workflow, cheatsheet, merge conflict, branching.
 - Add topics in GitHub repository settings:
-	`git`, `github`, `git-workflow`, `git-cheatsheet`, `version-control`, `merge-conflicts`.
+  `git`, `github`, `git-workflow`, `git-cheatsheet`, `version-control`, `merge-conflicts`.
 - Keep README updated regularly with practical examples.
 - Add a short demo screenshot or GIF in the repository root.
 - Encourage stars and forks by sharing the repository in developer communities.
