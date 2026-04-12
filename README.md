@@ -22,13 +22,15 @@ Author: Muhammad Zafar Ul Haq
 
 - [Installation](#installation)
 - [Git Setup](#git-setup)
+- [SSH Setup for GitHub](#ssh-setup-for-github)
 - [Quick Start Workflow](#quick-start-workflow)
 - [Create and Clone Repositories](#create-and-clone-repositories)
 - [Daily Git Commands](#daily-git-commands)
-- [Branching and Merging](#branching-and-merging)
-- [Sharing and Syncing with Remote](#sharing-and-syncing-with-remote)
 - [Inspect and Compare Changes](#inspect-and-compare-changes)
 - [Undo and Restore](#undo-and-restore)
+- [Branching and Merging](#branching-and-merging)
+- [Sharing and Syncing with Remote](#sharing-and-syncing-with-remote)
+- [Extra Useful Commands](#extra-useful-commands)
 - [In-Depth Feature Workflow](#in-depth-feature-workflow)
 - [Merge Conflict Resolution (A to Z)](#merge-conflict-resolution-a-to-z)
 - [Learning Resource](#learning-resource)
@@ -55,6 +57,65 @@ Set your email for commit history.
 
 ```bash
 git config --global user.email <email address>
+```
+
+## SSH Setup for GitHub
+
+### Command Info and Copy
+
+Generate a new SSH key (recommended: ed25519).
+
+```bash
+ssh-keygen -t ed25519 -C "<your-email@example.com>"
+```
+
+If your system does not support ed25519, use RSA instead.
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "<your-email@example.com>"
+```
+
+Start the SSH agent.
+
+```bash
+eval "$(ssh-agent -s)"
+```
+
+Add your SSH private key to the agent.
+
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+If you created RSA key, add this key instead.
+
+```bash
+ssh-add ~/.ssh/id_rsa
+```
+
+Copy your public key and add it to GitHub:
+GitHub -> Settings -> SSH and GPG keys -> New SSH key
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+If you created RSA key, copy this public key.
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+Confirm key is loaded in the agent.
+
+```bash
+ssh-add -l
+```
+
+Test SSH connection with GitHub.
+
+```bash
+ssh -T git@github.com
 ```
 
 ## Quick Start Workflow
@@ -124,6 +185,80 @@ Remove file/folder and stage the deletion.
 
 ```bash
 git rm -r <file-name.txt>
+```
+
+## Inspect and Compare Changes
+
+### Command Info and Copy
+
+Show commit history.
+
+```bash
+git log
+```
+
+Show history with more summary details.
+
+```bash
+git log --summary
+```
+
+Show short one-line history.
+
+```bash
+git log --oneline
+```
+
+Show one-line history with pretty format.
+
+```bash
+git log --pretty=oneline
+```
+
+Show compact short history format.
+
+```bash
+git log --pretty=short
+```
+
+## Undo and Restore
+
+### Command Info and Copy
+
+Quickly list commits.
+
+```bash
+git log --oneline
+```
+
+Checkout a past commit.
+
+```bash
+git checkout <commit id>
+```
+
+Undo a commit safely with a new commit.
+
+```bash
+git revert <commit id>
+```
+
+Reset history and working tree to a commit.
+
+```bash
+git reset --hard <commit id>
+```
+
+Stop tracking a file/folder but keep it locally.
+
+```bash
+git rm --cached <file/folder>
+```
+
+Restore a file to Git version.
+
+```bash
+git checkout <file/to/restore>
 ```
 
 ## Branching and Merging
@@ -290,74 +425,51 @@ Change origin URL to SSH URL.
 git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git
 ```
 
-## Inspect and Compare Changes
+## Extra Useful Commands
 
 ### Command Info and Copy
 
-Show commit history.
+Show remote URLs and confirm SSH/HTTPS origin.
 
 ```bash
-git log
+git remote -v
 ```
 
-Show history with more summary details.
+Download latest remote updates without merging.
 
 ```bash
-git log --summary
+git fetch origin
 ```
 
-Show short one-line history.
+Switch branches using modern Git command.
 
 ```bash
-git log --oneline
+git switch <branch name>
 ```
 
-Show one-line history with pretty format.
+Create and switch branch using modern Git command.
 
 ```bash
-git log --pretty=oneline
+git switch -c <branch name>
 ```
 
-Show compact short history format.
+Restore file changes in working tree.
 
 ```bash
-git log --pretty=short
+git restore <file-name.txt>
 ```
 
-## Undo and Restore
-
-### Command Info and Copy
-
-Quickly list commits.
+Show stash entries.
 
 ```bash
-git log --oneline
+git stash list
 ```
 
-Checkout a past commit.
+Apply and remove latest stash entry.
 
 ```bash
-git checkout <commit id>
+git stash pop
 ```
-
-Undo a commit safely with a new commit.
-
-```bash
-git revert <commit id>
-```
-
-Reset history and working tree to a commit.
-
-```bash
-git reset --hard <commit id>
-```
-
-Stop tracking a file/folder but keep it locally.
-
-```bash
-git rm --cached <file/folder>
-```
-
 Restore a file to Git version.
 
 ```bash

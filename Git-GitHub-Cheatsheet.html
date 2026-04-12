@@ -250,6 +250,7 @@
 					<h2>Quick Navigation</h2>
 					<ul class="toc">
 						<li><a href="#installation">Installation</a></li>
+						<li><a href="#ssh-setup">SSH Setup for GitHub</a></li>
 						<li><a href="#identity">Tell Git Who You Are</a></li>
 						<li><a href="#projects">Getting and Creating Projects</a></li>
 						<li><a href="#snapshotting">Basic Snapshotting</a></li>
@@ -257,6 +258,7 @@
 						<li><a href="#undo">Undo to Previous File/Commit</a></li>
 						<li><a href="#branching">Branching and Merging</a></li>
 						<li><a href="#sharing">Sharing and Updating Projects</a></li>
+						<li><a href="#extra-useful-commands">Extra Useful Commands</a></li>
 						<li><a href="#workflow-deep">In-Depth Feature Workflow</a></li>
 						<li><a href="#conflict-playbook">Merge Conflict Playbook</a></li>
 						<li><a href="#bundles">Copy-Ready Command Bundles</a></li>
@@ -284,6 +286,111 @@
 							<a href="https://git-scm.com/doc">https://git-scm.com/doc</a>
 						</li>
 					</ul>
+				</section>
+
+				<section id="ssh-setup">
+					<h2>SSH Setup for GitHub</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Generate a new SSH key (ed25519)</div>
+								<code>ssh-keygen -t ed25519 -C "&lt;your-email@example.com&gt;"</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='ssh-keygen -t ed25519 -C "&lt;your-email@example.com&gt;"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Start SSH agent</div>
+								<code>eval "$(ssh-agent -s)"</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='eval "$(ssh-agent -s)"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Fallback key method: generate RSA key (4096-bit)</div>
+								<code>ssh-keygen -t rsa -b 4096 -C "&lt;your-email@example.com&gt;"</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='ssh-keygen -t rsa -b 4096 -C "&lt;your-email@example.com&gt;"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Add SSH key to agent</div>
+								<code>ssh-add ~/.ssh/id_ed25519</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="ssh-add ~/.ssh/id_ed25519">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">If using RSA key, add this key to agent</div>
+								<code>ssh-add ~/.ssh/id_rsa</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="ssh-add ~/.ssh/id_rsa">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Show public key to copy into GitHub SSH settings</div>
+								<code>cat ~/.ssh/id_ed25519.pub</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="cat ~/.ssh/id_ed25519.pub">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">If using RSA key, show this public key</div>
+								<code>cat ~/.ssh/id_rsa.pub</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="cat ~/.ssh/id_rsa.pub">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Verify SSH key is loaded in agent</div>
+								<code>ssh-add -l</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="ssh-add -l">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Test SSH connection with GitHub</div>
+								<code>ssh -T git@github.com</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="ssh -T git@github.com">
+								Copy
+							</button>
+						</div>
+					</div>
 				</section>
 
 				<section id="identity">
@@ -831,6 +938,68 @@
 								data-copy="git remote set-url origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">
 								Copy
 							</button>
+						</div>
+					</div>
+				</section>
+
+				<section id="extra-useful-commands">
+					<h2>Extra Useful Commands</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Show remote URLs and verify origin</div>
+								<code>git remote -v</code>
+							</div>
+							<button class="copy-btn" data-copy="git remote -v">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Fetch latest remote updates without merge</div>
+								<code>git fetch origin</code>
+							</div>
+							<button class="copy-btn" data-copy="git fetch origin">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Switch branch using modern command</div>
+								<code>git switch &lt;branch name&gt;</code>
+							</div>
+							<button class="copy-btn" data-copy="git switch &lt;branch name&gt;">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Create and switch branch (modern)</div>
+								<code>git switch -c &lt;branch name&gt;</code>
+							</div>
+							<button class="copy-btn" data-copy="git switch -c &lt;branch name&gt;">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Restore file changes in working tree</div>
+								<code>git restore &lt;file-name.txt&gt;</code>
+							</div>
+							<button class="copy-btn" data-copy="git restore &lt;file-name.txt&gt;">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Show saved stash entries</div>
+								<code>git stash list</code>
+							</div>
+							<button class="copy-btn" data-copy="git stash list">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Apply and remove latest stash</div>
+								<code>git stash pop</code>
+							</div>
+							<button class="copy-btn" data-copy="git stash pop">Copy</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Pull using rebase for cleaner history</div>
+								<code>git pull --rebase origin &lt;branch name&gt;</code>
+							</div>
+							<button class="copy-btn" data-copy="git pull --rebase origin &lt;branch name&gt;">Copy</button>
 						</div>
 					</div>
 				</section>
