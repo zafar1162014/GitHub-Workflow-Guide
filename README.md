@@ -476,6 +476,7 @@ Apply and remove latest stash entry.
 ```bash
 git stash pop
 ```
+
 Restore a file to Git version.
 
 ```bash

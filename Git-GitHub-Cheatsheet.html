@@ -294,7 +294,10 @@
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Generate a new SSH key (ed25519)</div>
-								<code>ssh-keygen -t ed25519 -C "&lt;your-email@example.com&gt;"</code>
+								<code
+									>ssh-keygen -t ed25519 -C
+									"&lt;your-email@example.com&gt;"</code
+								>
 							</div>
 							<button
 								class="copy-btn"
@@ -315,8 +318,13 @@
 						</div>
 						<div class="cmd-row">
 							<div>
-								<div class="desc">Fallback key method: generate RSA key (4096-bit)</div>
-								<code>ssh-keygen -t rsa -b 4096 -C "&lt;your-email@example.com&gt;"</code>
+								<div class="desc">
+									Fallback key method: generate RSA key (4096-bit)
+								</div>
+								<code
+									>ssh-keygen -t rsa -b 4096 -C
+									"&lt;your-email@example.com&gt;"</code
+								>
 							</div>
 							<button
 								class="copy-btn"
@@ -348,7 +356,9 @@
 						</div>
 						<div class="cmd-row">
 							<div>
-								<div class="desc">Show public key to copy into GitHub SSH settings</div>
+								<div class="desc">
+									Show public key to copy into GitHub SSH settings
+								</div>
 								<code>cat ~/.ssh/id_ed25519.pub</code>
 							</div>
 							<button
@@ -392,8 +402,13 @@
 						</div>
 						<div class="cmd-row">
 							<div>
-								<div class="desc">Clone a repository over SSH after key setup</div>
-								<code>git clone ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code>
+								<div class="desc">
+									Clone a repository over SSH after key setup
+								</div>
+								<code
+									>git clone
+									ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code
+								>
 							</div>
 							<button
 								class="copy-btn"
@@ -961,56 +976,90 @@
 								<div class="desc">Show remote URLs and verify origin</div>
 								<code>git remote -v</code>
 							</div>
-							<button class="copy-btn" data-copy="git remote -v">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git remote -v">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
-								<div class="desc">Fetch latest remote updates without merge</div>
+								<div class="desc">
+									Fetch latest remote updates without merge
+								</div>
 								<code>git fetch origin</code>
 							</div>
-							<button class="copy-btn" data-copy="git fetch origin">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git fetch origin">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Switch branch using modern command</div>
 								<code>git switch &lt;branch name&gt;</code>
 							</div>
-							<button class="copy-btn" data-copy="git switch &lt;branch name&gt;">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git switch &lt;branch name&gt;">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Create and switch branch (modern)</div>
 								<code>git switch -c &lt;branch name&gt;</code>
 							</div>
-							<button class="copy-btn" data-copy="git switch -c &lt;branch name&gt;">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git switch -c &lt;branch name&gt;">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Restore file changes in working tree</div>
 								<code>git restore &lt;file-name.txt&gt;</code>
 							</div>
-							<button class="copy-btn" data-copy="git restore &lt;file-name.txt&gt;">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git restore &lt;file-name.txt&gt;">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Show saved stash entries</div>
 								<code>git stash list</code>
 							</div>
-							<button class="copy-btn" data-copy="git stash list">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git stash list">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Apply and remove latest stash</div>
 								<code>git stash pop</code>
 							</div>
-							<button class="copy-btn" data-copy="git stash pop">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git stash pop">
+								Copy
+							</button>
 						</div>
 						<div class="cmd-row">
 							<div>
 								<div class="desc">Pull using rebase for cleaner history</div>
 								<code>git pull --rebase origin &lt;branch name&gt;</code>
 							</div>
-							<button class="copy-btn" data-copy="git pull --rebase origin &lt;branch name&gt;">Copy</button>
+							<button
+								class="copy-btn"
+								data-copy="git pull --rebase origin &lt;branch name&gt;">
+								Copy
+							</button>
 						</div>
 					</div>
 				</section>
