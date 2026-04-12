@@ -1,6 +1,6 @@
 # Git and GitHub Workflow Guide
 
-An easy, practical, and copy-ready GitHub workflow guide with Git commands, branching, pull request flow, and merge conflict resolution from A to Z.
+An easy, practical, and copy-ready GitHub workflow guide with clear command info, branching workflow, and merge conflict resolution from A to Z.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Workflow%20Guide-181717?logo=github)](https://github.com/zafar1162014/GitHub-Workflow-Guide)
 [![Git](https://img.shields.io/badge/Git-Cheat%20Sheet-F05032?logo=git&logoColor=white)](https://git-scm.com/doc)
@@ -13,10 +13,10 @@ Author: Muhammad Zafar Ul Haq
 
 ## Why This Guide
 
-- Beginner-friendly and fast to scan.
-- Useful for developers, students, and teams.
-- Includes real workflow steps, not just isolated commands.
-- Covers merge/rebase conflict handling in detail.
+- Beginner-friendly and easy to scan.
+- Every command has a clear explanation.
+- All commands are copy-ready.
+- Covers daily workflow, branching, and conflict handling.
 
 ## Quick Navigation
 
@@ -31,8 +31,6 @@ Author: Muhammad Zafar Ul Haq
 - [Undo and Restore](#undo-and-restore)
 - [In-Depth Feature Workflow](#in-depth-feature-workflow)
 - [Merge Conflict Resolution (A to Z)](#merge-conflict-resolution-a-to-z)
-- [Copy-Ready Command Bundles](#copy-ready-command-bundles)
-- [SEO and Repository Visibility Tips](#seo-and-repository-visibility-tips)
 - [Learning Resource](#learning-resource)
 
 ---
@@ -41,26 +39,27 @@ Author: Muhammad Zafar Ul Haq
 
 - Git download: https://git-scm.com/downloads
 - GitHub Desktop: https://desktop.github.com/
-- Official Git docs: https://git-scm.com/doc
+- Official docs: https://git-scm.com/doc
 
 ## Git Setup
 
-| Description | Command |
-| --- | --- |
-| Configure author name | `git config --global user.name "<username>"` |
-| Configure author email | `git config --global user.email <email address>` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Set your name for commit history.
 
 ```bash
 git config --global user.name "<username>"
 ```
+
+Set your email for commit history.
 
 ```bash
 git config --global user.email <email address>
 ```
 
 ## Quick Start Workflow
+
+Clone a repo, create a feature branch, commit changes, and push branch to GitHub.
 
 ```bash
 git clone ssh://git@github.com/<username>/<repository-name>.git
@@ -73,16 +72,15 @@ git push -u origin feature/<short-name>
 
 ## Create and Clone Repositories
 
-| Description | Command |
-| --- | --- |
-| Initialize local repository | `git init` |
-| Clone repository via SSH | `git clone ssh://git@github.com/<username>/<repository-name>.git` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Start Git tracking in current folder.
 
 ```bash
 git init
 ```
+
+Download a remote repository to your machine.
 
 ```bash
 git clone ssh://git@github.com/<username>/<repository-name>.git
@@ -90,35 +88,39 @@ git clone ssh://git@github.com/<username>/<repository-name>.git
 
 ## Daily Git Commands
 
-| Description | Command |
-| --- | --- |
-| Check status | `git status` |
-| Stage one file | `git add <file-name.txt>` |
-| Stage all changes | `git add -A` or `git add .` |
-| Commit changes | `git commit -m "<commit message>"` |
-| Remove file/folder | `git rm -r <file-name.txt>` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Check changed, staged, and untracked files.
 
 ```bash
 git status
 ```
 
+Stage one specific file.
+
 ```bash
 git add <file-name.txt>
 ```
+
+Stage all changes in the repository.
 
 ```bash
 git add -A
 ```
 
+Alternative to stage all changes.
+
 ```bash
 git add .
 ```
 
+Save staged changes with a message.
+
 ```bash
 git commit -m "<commit message>"
 ```
+
+Remove file/folder and stage the deletion.
 
 ```bash
 git rm -r <file-name.txt>
@@ -126,86 +128,99 @@ git rm -r <file-name.txt>
 
 ## Branching and Merging
 
-| Description | Command |
-| --- | --- |
-| List local branches | `git branch` |
-| List local and remote branches | `git branch -a` |
-| Create new branch | `git branch <branch name>` |
-| Create and switch branch | `git checkout -b <branch name>` |
-| Track remote branch locally | `git checkout -b <branch name> origin/<branch name>` |
-| Rename branch | `git branch -m <old branch name> <new branch name>` |
-| Switch branch | `git checkout <branch name>` |
-| Switch to last branch | `git checkout -` |
-| Discard file changes | `git checkout -- <file-name.txt>` |
-| Delete local branch | `git branch -d <branch name>` |
-| Delete remote branch | `git push origin --delete <branch name>` |
-| Diff before merge | `git diff <source branch> <target branch>` |
-| Merge into current branch | `git merge <branch name>` |
-| Merge source into target | `git merge <source branch> <target branch>` |
-| Stash current work | `git stash` |
-| Clear all stash entries | `git stash clear` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Show local branches.
 
 ```bash
 git branch
 ```
 
+Show local and remote branches.
+
 ```bash
 git branch -a
 ```
+
+Create a new branch.
 
 ```bash
 git branch <branch name>
 ```
 
+Create and switch to a new branch.
+
 ```bash
 git checkout -b <branch name>
 ```
+
+Create local branch from a remote branch.
 
 ```bash
 git checkout -b <branch name> origin/<branch name>
 ```
 
+Rename a branch.
+
 ```bash
 git branch -m <old branch name> <new branch name>
 ```
+
+Switch to a branch.
 
 ```bash
 git checkout <branch name>
 ```
 
+Switch back to previously checked out branch.
+
 ```bash
 git checkout -
 ```
+
+Discard local changes in one file.
 
 ```bash
 git checkout -- <file-name.txt>
 ```
 
+Delete local branch safely.
+
 ```bash
 git branch -d <branch name>
 ```
+
+Delete remote branch.
 
 ```bash
 git push origin --delete <branch name>
 ```
 
+Compare changes between two branches.
+
 ```bash
 git diff <source branch> <target branch>
 ```
+
+Merge branch into current branch.
 
 ```bash
 git merge <branch name>
 ```
 
+Merge source branch into target branch.
+
 ```bash
 git merge <source branch> <target branch>
 ```
 
+Save uncommitted changes temporarily.
+
 ```bash
 git stash
 ```
+
+Remove all stash entries.
 
 ```bash
 git stash clear
@@ -213,56 +228,63 @@ git stash clear
 
 ## Sharing and Syncing with Remote
 
-| Description | Command |
-| --- | --- |
-| Push branch | `git push origin <branch name>` |
-| Push and set upstream | `git push -u origin <branch name>` |
-| Push current tracked branch | `git push` |
-| Push all branches | `git push --all` |
-| Force push | `git push -f` |
-| Delete remote branch | `git push origin --delete <branch name>` |
-| Pull latest tracked branch | `git pull` |
-| Pull specific branch | `git pull origin <branch name>` |
-| Add remote origin | `git remote add origin ssh://git@github.com/<username>/<repository-name>.git` |
-| Switch origin to SSH URL | `git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Push branch to remote repository.
 
 ```bash
 git push origin <branch name>
 ```
 
+Push and set upstream tracking.
+
 ```bash
 git push -u origin <branch name>
 ```
+
+Push current tracked branch.
 
 ```bash
 git push
 ```
 
+Push all local branches.
+
 ```bash
 git push --all
 ```
+
+Force push (use carefully).
 
 ```bash
 git push -f
 ```
 
+Delete branch from remote.
+
 ```bash
 git push origin --delete <branch name>
 ```
+
+Pull latest updates from tracked branch.
 
 ```bash
 git pull
 ```
 
+Pull updates from specific branch.
+
 ```bash
 git pull origin <branch name>
 ```
 
+Add remote named origin.
+
 ```bash
 git remote add origin ssh://git@github.com/<username>/<repository-name>.git
 ```
+
+Change origin URL to SSH URL.
 
 ```bash
 git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git
@@ -270,31 +292,33 @@ git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git
 
 ## Inspect and Compare Changes
 
-| Description | Command |
-| --- | --- |
-| Commit history | `git log` |
-| Detailed history | `git log --summary` |
-| One-line history | `git log --oneline` |
-| Alternative one-line style | `git log --pretty=oneline` |
-| Short style history | `git log --pretty=short` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Show commit history.
 
 ```bash
 git log
 ```
 
+Show history with more summary details.
+
 ```bash
 git log --summary
 ```
+
+Show short one-line history.
 
 ```bash
 git log --oneline
 ```
 
+Show one-line history with pretty format.
+
 ```bash
 git log --pretty=oneline
 ```
+
+Show compact short history format.
 
 ```bash
 git log --pretty=short
@@ -302,36 +326,39 @@ git log --pretty=short
 
 ## Undo and Restore
 
-| Description | Command |
-| --- | --- |
-| List commits quickly | `git log --oneline` |
-| Checkout old commit | `git checkout <commit id>` |
-| Revert a commit safely | `git revert <commit id>` |
-| Hard reset to commit | `git reset --hard <commit id>` |
-| Stop tracking file/folder | `git rm --cached <file/folder>` |
-| Restore file from Git | `git checkout <file/to/restore>` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Quickly list commits.
 
 ```bash
 git log --oneline
 ```
 
+Checkout a past commit.
+
 ```bash
 git checkout <commit id>
 ```
+
+Undo a commit safely with a new commit.
 
 ```bash
 git revert <commit id>
 ```
 
+Reset history and working tree to a commit.
+
 ```bash
 git reset --hard <commit id>
 ```
 
+Stop tracking a file/folder but keep it locally.
+
 ```bash
 git rm --cached <file/folder>
 ```
+
+Restore a file to Git version.
 
 ```bash
 git checkout <file/to/restore>
@@ -341,6 +368,8 @@ git checkout <file/to/restore>
 
 ### 1. Sync Main Before Starting
 
+Always start feature work from latest `main`.
+
 ```bash
 git checkout main
 git pull origin main
@@ -348,11 +377,15 @@ git pull origin main
 
 ### 2. Create and Start Feature Branch
 
+Isolate your work in a separate branch.
+
 ```bash
 git checkout -b feature/<short-name>
 ```
 
 ### 3. Commit in Small Units
+
+Keep history clean and review-friendly.
 
 ```bash
 git status
@@ -362,11 +395,15 @@ git commit -m "feat: implement <small change>"
 
 ### 4. Publish Branch and Open Pull Request
 
+Share your branch and open PR for review.
+
 ```bash
 git push -u origin feature/<short-name>
 ```
 
 ### 5. Keep Feature Branch Updated
+
+Reduce large conflicts before merge.
 
 ```bash
 git checkout main
@@ -377,6 +414,8 @@ git merge main
 
 ### 6. After Merge, Clean Up
 
+Keep local and remote branches tidy.
+
 ```bash
 git checkout main
 git pull origin main
@@ -386,77 +425,89 @@ git push origin --delete feature/<short-name>
 
 ## Merge Conflict Resolution (A to Z)
 
-| Step | Command |
-| --- | --- |
-| Show conflict status | `git status` |
-| List unresolved files | `git diff --name-only --diff-filter=U` |
-| View conflict details | `git diff` |
-| Show conflict-related commits | `git log --merge --oneline` |
-| Keep current branch version | `git checkout --ours <file>` |
-| Keep incoming branch version | `git checkout --theirs <file>` |
-| Open visual merge tool | `git mergetool` |
-| Mark resolved file | `git add <file>` |
-| Finalize merge conflict resolution | `git commit -m "resolve: merge conflicts"` |
-| Abort merge | `git merge --abort` |
-| Continue rebase | `git rebase --continue` |
-| Skip one patch in rebase | `git rebase --skip` |
-| Abort rebase | `git rebase --abort` |
+### Command Info and Copy
 
-### Individual Copy Commands
+Show which files are in conflict.
 
 ```bash
 git status
 ```
 
+List unresolved conflict files only.
+
 ```bash
 git diff --name-only --diff-filter=U
 ```
+
+Inspect conflict details.
 
 ```bash
 git diff
 ```
 
+Show commits involved in current conflict.
+
 ```bash
 git log --merge --oneline
 ```
+
+Accept your current branch version for one file.
 
 ```bash
 git checkout --ours <file>
 ```
 
+Accept incoming branch version for one file.
+
 ```bash
 git checkout --theirs <file>
 ```
+
+Open visual merge tool.
 
 ```bash
 git mergetool
 ```
 
+Mark file as resolved.
+
 ```bash
 git add <file>
 ```
+
+Finalize merge conflict resolution.
 
 ```bash
 git commit -m "resolve: merge conflicts"
 ```
 
+Cancel current merge.
+
 ```bash
 git merge --abort
 ```
+
+Continue rebase after resolving conflicts.
 
 ```bash
 git rebase --continue
 ```
 
+Skip problematic patch during rebase.
+
 ```bash
 git rebase --skip
 ```
+
+Cancel current rebase.
 
 ```bash
 git rebase --abort
 ```
 
 ### Merge Conflict Fast Flow
+
+Resolve merge conflict quickly when you already know what to keep.
 
 ```bash
 git status
@@ -468,82 +519,14 @@ git commit -m "resolve: merge conflicts"
 
 ### Rebase Conflict Fast Flow
 
+Resolve and continue rebase process.
+
 ```bash
 git status
 git diff --name-only --diff-filter=U
 git add <file1> <file2>
 git rebase --continue
 ```
-
-## Copy-Ready Command Bundles
-
-### Setup Identity
-
-```bash
-git config --global user.name "<username>"
-git config --global user.email <email address>
-```
-
-### Create or Clone Project
-
-```bash
-git init
-git clone ssh://git@github.com/<username>/<repository-name>.git
-```
-
-### Daily Workflow
-
-```bash
-git status
-git add -A
-git commit -m "<commit message>"
-git push
-```
-
-### Branch Workflow
-
-```bash
-git branch <branch name>
-git checkout -b <branch name>
-git checkout <branch name>
-git merge <branch name>
-```
-
-### Update from Remote
-
-```bash
-git pull
-git pull origin <branch name>
-```
-
-### Remote Setup and Push
-
-```bash
-git remote add origin ssh://git@github.com/<username>/<repository-name>.git
-git push -u origin <branch name>
-```
-
-### Undo and Restore
-
-```bash
-git log --oneline
-git revert <commit id>
-git reset --hard <commit id>
-git rm --cached <file/folder>
-git checkout <file/to/restore>
-```
-
-## SEO and Repository Visibility Tips
-
-To help this repository rank higher in search results on GitHub and Google:
-
-- Keep repository name and README title aligned with target keywords:
-  Git, GitHub, workflow, cheatsheet, merge conflict, branching.
-- Add topics in GitHub repository settings:
-  `git`, `github`, `git-workflow`, `git-cheatsheet`, `version-control`, `merge-conflicts`.
-- Keep README updated regularly with practical examples.
-- Add a short demo screenshot or GIF in the repository root.
-- Encourage stars and forks by sharing the repository in developer communities.
 
 ## Learning Resource
 

@@ -1,530 +1,1222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Git and GitHub Workflow Guide</title>
-    <style>
-        :root {
-            --bg: #f4f7fb;
-            --surface: #ffffff;
-            --text: #12263a;
-            --muted: #5b6b7a;
-            --accent: #0b6efd;
-            --accent-dark: #0958c9;
-            --line: #d6e0ea;
-            --code-bg: #f2f6ff;
-            --ok: #15803d;
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Git and GitHub Workflow Guide</title>
+		<style>
+			:root {
+				--bg: #f4f7fb;
+				--surface: #ffffff;
+				--text: #12263a;
+				--muted: #5b6b7a;
+				--accent: #0b6efd;
+				--accent-dark: #0958c9;
+				--line: #d6e0ea;
+				--code-bg: #f2f6ff;
+				--ok: #15803d;
+			}
 
-        * {
-            box-sizing: border-box;
-        }
+			* {
+				box-sizing: border-box;
+			}
 
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text);
-            background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 55%, #edf7f4 100%);
-            line-height: 1.55;
-            padding: 22px;
-        }
+			body {
+				margin: 0;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				color: var(--text);
+				background: linear-gradient(
+					180deg,
+					#eef4ff 0%,
+					var(--bg) 55%,
+					#edf7f4 100%
+				);
+				line-height: 1.55;
+				padding: 22px;
+			}
 
-        .container {
-            max-width: 1080px;
-            margin: 0 auto;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(18, 38, 58, 0.08);
-            overflow: hidden;
-        }
+			.container {
+				max-width: 1080px;
+				margin: 0 auto;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 14px;
+				box-shadow: 0 12px 30px rgba(18, 38, 58, 0.08);
+				overflow: hidden;
+			}
 
-        header {
-            padding: 28px 28px 16px;
-            background: linear-gradient(120deg, #eaf1ff 0%, #e9fff5 100%);
-            border-bottom: 1px solid var(--line);
-        }
+			header {
+				padding: 28px 28px 16px;
+				background: linear-gradient(120deg, #eaf1ff 0%, #e9fff5 100%);
+				border-bottom: 1px solid var(--line);
+			}
 
-        h1 {
-            margin: 0 0 8px;
-            font-size: 2rem;
-        }
+			h1 {
+				margin: 0 0 8px;
+				font-size: 2rem;
+			}
 
-        .subtitle {
-            margin: 0;
-            color: var(--muted);
-        }
+			.subtitle {
+				margin: 0;
+				color: var(--muted);
+			}
 
-        main {
-            padding: 16px 28px 28px;
-        }
+			main {
+				padding: 16px 28px 28px;
+			}
 
-        section {
-            margin-top: 26px;
-        }
+			section {
+				margin-top: 26px;
+			}
 
-        h2 {
-            margin: 0 0 10px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--line);
-        }
+			h2 {
+				margin: 0 0 10px;
+				padding-bottom: 8px;
+				border-bottom: 2px solid var(--line);
+			}
 
-        .toc {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 8px 14px;
-            padding: 0;
-            list-style: none;
-            margin: 12px 0 0;
-        }
+			.toc {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+				gap: 8px 14px;
+				padding: 0;
+				list-style: none;
+				margin: 12px 0 0;
+			}
 
-        .toc a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
+			.toc a {
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: 600;
+			}
 
-        .toc a:hover {
-            color: var(--accent-dark);
-            text-decoration: underline;
-        }
+			.toc a:hover {
+				color: var(--accent-dark);
+				text-decoration: underline;
+			}
 
-        .resource-list {
-            margin: 0;
-            padding-left: 20px;
-        }
+			.resource-list {
+				margin: 0;
+				padding-left: 20px;
+			}
 
-        .resource-list li {
-            margin: 6px 0;
-        }
+			.resource-list li {
+				margin: 6px 0;
+			}
 
-        .cmd-grid {
-            display: grid;
-            gap: 10px;
-        }
+			.cmd-grid {
+				display: grid;
+				gap: 10px;
+			}
 
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 10px;
-            align-items: center;
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 10px 12px;
-            background: #fbfdff;
-        }
+			.cmd-row {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				gap: 10px;
+				align-items: center;
+				border: 1px solid var(--line);
+				border-radius: 10px;
+				padding: 10px 12px;
+				background: #fbfdff;
+			}
 
-        .desc {
-            margin-bottom: 4px;
-            color: var(--muted);
-            font-size: 0.94rem;
-        }
+			.desc {
+				margin-bottom: 4px;
+				color: var(--muted);
+				font-size: 0.94rem;
+			}
 
-        code {
-            display: inline-block;
-            background: var(--code-bg);
-            border: 1px solid #dce7ff;
-            border-radius: 7px;
-            padding: 3px 7px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-            font-size: 0.92rem;
-            color: #123f8f;
-            word-break: break-word;
-        }
+			code {
+				display: inline-block;
+				background: var(--code-bg);
+				border: 1px solid #dce7ff;
+				border-radius: 7px;
+				padding: 3px 7px;
+				font-family:
+					ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono',
+					monospace;
+				font-size: 0.92rem;
+				color: #123f8f;
+				word-break: break-word;
+			}
 
-        .copy-btn {
-            border: 1px solid var(--accent);
-            background: var(--accent);
-            color: #fff;
-            padding: 7px 11px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            min-width: 72px;
-        }
+			.copy-btn {
+				border: 1px solid var(--accent);
+				background: var(--accent);
+				color: #fff;
+				padding: 7px 11px;
+				border-radius: 8px;
+				font-weight: 600;
+				cursor: pointer;
+				min-width: 72px;
+			}
 
-        .copy-btn:hover {
-            background: var(--accent-dark);
-            border-color: var(--accent-dark);
-        }
+			.copy-btn:hover {
+				background: var(--accent-dark);
+				border-color: var(--accent-dark);
+			}
 
-        .copy-btn.success {
-            background: var(--ok);
-            border-color: var(--ok);
-        }
+			.copy-btn.success {
+				background: var(--ok);
+				border-color: var(--ok);
+			}
 
-        .bundle {
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 12px;
-            background: #f8fbff;
-            margin-top: 10px;
-        }
+			.bundle {
+				border: 1px solid var(--line);
+				border-radius: 10px;
+				padding: 12px;
+				background: #f8fbff;
+				margin-top: 10px;
+			}
 
-        .bundle h3 {
-            margin: 0 0 8px;
-            font-size: 1rem;
-        }
+			.bundle h3 {
+				margin: 0 0 8px;
+				font-size: 1rem;
+			}
 
-        pre {
-            margin: 8px 0 0;
-            background: #0f172a;
-            color: #e5edf9;
-            border-radius: 8px;
-            padding: 12px;
-            overflow-x: auto;
-        }
+			pre {
+				margin: 8px 0 0;
+				background: #0f172a;
+				color: #e5edf9;
+				border-radius: 8px;
+				padding: 12px;
+				overflow-x: auto;
+			}
 
-        pre code {
-            background: transparent;
-            border: 0;
-            color: inherit;
-            padding: 0;
-            display: block;
-        }
+			pre code {
+				background: transparent;
+				border: 0;
+				color: inherit;
+				padding: 0;
+				display: block;
+			}
 
-        .bundle-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
+			.bundle-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 10px;
+			}
 
-        footer {
-            margin-top: 24px;
-            border-top: 1px solid var(--line);
-            padding-top: 12px;
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
+			footer {
+				margin-top: 24px;
+				border-top: 1px solid var(--line);
+				padding-top: 12px;
+				color: var(--muted);
+				font-size: 0.92rem;
+			}
 
-        @media (max-width: 720px) {
-            body {
-                padding: 10px;
-            }
+			@media (max-width: 720px) {
+				body {
+					padding: 10px;
+				}
 
-            header,
-            main {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
+				header,
+				main {
+					padding-left: 14px;
+					padding-right: 14px;
+				}
 
-            .cmd-row {
-                grid-template-columns: 1fr;
-            }
+				.cmd-row {
+					grid-template-columns: 1fr;
+				}
 
-            .bundle-head {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Git and GitHub Workflow Guide</h1>
-            <p class="subtitle">Simple cheatsheet with copyable commands for daily use.</p>
-            <p class="subtitle">Repository: <a href="https://github.com/zafar1162014/GitHub-Workflow-Guide">https://github.com/zafar1162014/GitHub-Workflow-Guide</a></p>
-        </header>
+				.bundle-head {
+					align-items: flex-start;
+					flex-direction: column;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Git and GitHub Workflow Guide</h1>
+				<p class="subtitle">
+					Simple cheatsheet with copyable commands for daily use.
+				</p>
+				<p class="subtitle">
+					Repository:
+					<a href="https://github.com/zafar1162014/GitHub-Workflow-Guide"
+						>https://github.com/zafar1162014/GitHub-Workflow-Guide</a
+					>
+				</p>
+			</header>
 
-        <main>
-            <section id="navigation">
-                <h2>Quick Navigation</h2>
-                <ul class="toc">
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#identity">Tell Git Who You Are</a></li>
-                    <li><a href="#projects">Getting and Creating Projects</a></li>
-                    <li><a href="#snapshotting">Basic Snapshotting</a></li>
-                    <li><a href="#inspection">Inspection and Comparison</a></li>
-                    <li><a href="#undo">Undo to Previous File/Commit</a></li>
-                    <li><a href="#branching">Branching and Merging</a></li>
-                    <li><a href="#sharing">Sharing and Updating Projects</a></li>
-                    <li><a href="#workflow-deep">In-Depth Feature Workflow</a></li>
-                    <li><a href="#conflict-playbook">Merge Conflict Playbook</a></li>
-                    <li><a href="#bundles">Copy-Ready Command Bundles</a></li>
-                    <li><a href="#resources">Extra Learning Resource</a></li>
-                </ul>
-            </section>
+			<main>
+				<section id="navigation">
+					<h2>Quick Navigation</h2>
+					<ul class="toc">
+						<li><a href="#installation">Installation</a></li>
+						<li><a href="#identity">Tell Git Who You Are</a></li>
+						<li><a href="#projects">Getting and Creating Projects</a></li>
+						<li><a href="#snapshotting">Basic Snapshotting</a></li>
+						<li><a href="#inspection">Inspection and Comparison</a></li>
+						<li><a href="#undo">Undo to Previous File/Commit</a></li>
+						<li><a href="#branching">Branching and Merging</a></li>
+						<li><a href="#sharing">Sharing and Updating Projects</a></li>
+						<li><a href="#workflow-deep">In-Depth Feature Workflow</a></li>
+						<li><a href="#conflict-playbook">Merge Conflict Playbook</a></li>
+						<li><a href="#bundles">Copy-Ready Command Bundles</a></li>
+						<li><a href="#resources">Extra Learning Resource</a></li>
+					</ul>
+				</section>
 
-            <section id="installation">
-                <h2>Installation</h2>
-                <ul class="resource-list">
-                    <li>Git download: <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
-                    <li>GitHub Desktop: <a href="https://desktop.github.com/">https://desktop.github.com/</a></li>
-                    <li>Official docs: <a href="https://git-scm.com/doc">https://git-scm.com/doc</a></li>
-                </ul>
-            </section>
+				<section id="installation">
+					<h2>Installation</h2>
+					<ul class="resource-list">
+						<li>
+							Git download:
+							<a href="https://git-scm.com/downloads"
+								>https://git-scm.com/downloads</a
+							>
+						</li>
+						<li>
+							GitHub Desktop:
+							<a href="https://desktop.github.com/"
+								>https://desktop.github.com/</a
+							>
+						</li>
+						<li>
+							Official docs:
+							<a href="https://git-scm.com/doc">https://git-scm.com/doc</a>
+						</li>
+					</ul>
+				</section>
 
-            <section id="identity">
-                <h2>Tell Git Who You Are</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">Configure author name</div><code>git config --global user.name "&lt;username&gt;"</code></div><button class="copy-btn" data-copy="git config --global user.name &quot;&lt;username&gt;&quot;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Configure author email</div><code>git config --global user.email &lt;email address&gt;</code></div><button class="copy-btn" data-copy="git config --global user.email &lt;email address&gt;">Copy</button></div>
-                </div>
-            </section>
+				<section id="identity">
+					<h2>Tell Git Who You Are</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Configure author name</div>
+								<code>git config --global user.name "&lt;username&gt;"</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='git config --global user.name "&lt;username&gt;"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Configure author email</div>
+								<code
+									>git config --global user.email &lt;email address&gt;</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git config --global user.email &lt;email address&gt;">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="projects">
-                <h2>Getting and Creating Projects</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">Initialize a local repository</div><code>git init</code></div><button class="copy-btn" data-copy="git init">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Clone repository over SSH</div><code>git clone ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code></div><button class="copy-btn" data-copy="git clone ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">Copy</button></div>
-                </div>
-            </section>
+				<section id="projects">
+					<h2>Getting and Creating Projects</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Initialize a local repository</div>
+								<code>git init</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git init">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Clone repository over SSH</div>
+								<code
+									>git clone
+									ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git clone ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="snapshotting">
-                <h2>Basic Snapshotting</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">Check status</div><code>git status</code></div><button class="copy-btn" data-copy="git status">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Add a file to staging</div><code>git add &lt;file-name.txt&gt;</code></div><button class="copy-btn" data-copy="git add &lt;file-name.txt&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Add all files to staging</div><code>git add -A</code> or <code>git add .</code></div><button class="copy-btn" data-copy="git add -A">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Commit changes</div><code>git commit -m "&lt;commit message&gt;"</code></div><button class="copy-btn" data-copy="git commit -m &quot;&lt;commit message&gt;&quot;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Remove file or folder</div><code>git rm -r &lt;file-name.txt&gt;</code></div><button class="copy-btn" data-copy="git rm -r &lt;file-name.txt&gt;">Copy</button></div>
-                </div>
-            </section>
+				<section id="snapshotting">
+					<h2>Basic Snapshotting</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Check status</div>
+								<code>git status</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git status">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Add a file to staging</div>
+								<code>git add &lt;file-name.txt&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git add &lt;file-name.txt&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Add all files to staging</div>
+								<code>git add -A</code> or <code>git add .</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git add -A">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Commit changes</div>
+								<code>git commit -m "&lt;commit message&gt;"</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='git commit -m "&lt;commit message&gt;"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Remove file or folder</div>
+								<code>git rm -r &lt;file-name.txt&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git rm -r &lt;file-name.txt&gt;">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="inspection">
-                <h2>Inspection and Comparison</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">View changes</div><code>git log</code></div><button class="copy-btn" data-copy="git log">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">View changes (detailed)</div><code>git log --summary</code></div><button class="copy-btn" data-copy="git log --summary">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">One-line view</div><code>git log --oneline</code> or <code>git log --pretty=oneline</code> or <code>git log --pretty=short</code></div><button class="copy-btn" data-copy="git log --oneline">Copy</button></div>
-                </div>
-            </section>
+				<section id="inspection">
+					<h2>Inspection and Comparison</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">View changes</div>
+								<code>git log</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">View changes (detailed)</div>
+								<code>git log --summary</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log --summary">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">One-line view</div>
+								<code>git log --oneline</code> or
+								<code>git log --pretty=oneline</code> or
+								<code>git log --pretty=short</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log --oneline">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="undo">
-                <h2>Undo to Previous File/Commit</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">List commits with id and message</div><code>git log --oneline</code></div><button class="copy-btn" data-copy="git log --oneline">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Checkout previous commit</div><code>git checkout &lt;commit id&gt;</code></div><button class="copy-btn" data-copy="git checkout &lt;commit id&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Revert one commit</div><code>git revert &lt;commit id&gt;</code></div><button class="copy-btn" data-copy="git revert &lt;commit id&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Reset hard to commit</div><code>git reset --hard &lt;commit id&gt;</code></div><button class="copy-btn" data-copy="git reset --hard &lt;commit id&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Stop tracking file or folder</div><code>git rm --cached &lt;file/folder&gt;</code></div><button class="copy-btn" data-copy="git rm --cached &lt;file/folder&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Restore a file</div><code>git checkout &lt;file/to/restore&gt;</code></div><button class="copy-btn" data-copy="git checkout &lt;file/to/restore&gt;">Copy</button></div>
-                </div>
-            </section>
+				<section id="undo">
+					<h2>Undo to Previous File/Commit</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">List commits with id and message</div>
+								<code>git log --oneline</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log --oneline">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Checkout previous commit</div>
+								<code>git checkout &lt;commit id&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout &lt;commit id&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Revert one commit</div>
+								<code>git revert &lt;commit id&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git revert &lt;commit id&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Reset hard to commit</div>
+								<code>git reset --hard &lt;commit id&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git reset --hard &lt;commit id&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Stop tracking file or folder</div>
+								<code>git rm --cached &lt;file/folder&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git rm --cached &lt;file/folder&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Restore a file</div>
+								<code>git checkout &lt;file/to/restore&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout &lt;file/to/restore&gt;">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="branching">
-                <h2>Branching and Merging</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">List branches</div><code>git branch</code></div><button class="copy-btn" data-copy="git branch">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">List all branches (local and remote)</div><code>git branch -a</code></div><button class="copy-btn" data-copy="git branch -a">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Create branch</div><code>git branch &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git branch &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Create and switch to branch</div><code>git checkout -b &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git checkout -b &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Track remote branch locally</div><code>git checkout -b &lt;branch name&gt; origin/&lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git checkout -b &lt;branch name&gt; origin/&lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Rename local branch</div><code>git branch -m &lt;old branch name&gt; &lt;new branch name&gt;</code></div><button class="copy-btn" data-copy="git branch -m &lt;old branch name&gt; &lt;new branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Switch branch</div><code>git checkout &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git checkout &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Switch to last checked-out branch</div><code>git checkout -</code></div><button class="copy-btn" data-copy="git checkout -">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Discard changes in file</div><code>git checkout -- &lt;file-name.txt&gt;</code></div><button class="copy-btn" data-copy="git checkout -- &lt;file-name.txt&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Delete local branch</div><code>git branch -d &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git branch -d &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Delete remote branch</div><code>git push origin --delete &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git push origin --delete &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Preview diff before merge</div><code>git diff &lt;source branch&gt; &lt;target branch&gt;</code></div><button class="copy-btn" data-copy="git diff &lt;source branch&gt; &lt;target branch&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Merge branch into active branch</div><code>git merge &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git merge &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Merge source branch into target branch</div><code>git merge &lt;source branch&gt; &lt;target branch&gt;</code></div><button class="copy-btn" data-copy="git merge &lt;source branch&gt; &lt;target branch&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Stash local changes</div><code>git stash</code></div><button class="copy-btn" data-copy="git stash">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Clear stash entries</div><code>git stash clear</code></div><button class="copy-btn" data-copy="git stash clear">Copy</button></div>
-                </div>
-            </section>
+				<section id="branching">
+					<h2>Branching and Merging</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">List branches</div>
+								<code>git branch</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git branch">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">List all branches (local and remote)</div>
+								<code>git branch -a</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git branch -a">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Create branch</div>
+								<code>git branch &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git branch &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Create and switch to branch</div>
+								<code>git checkout -b &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout -b &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Track remote branch locally</div>
+								<code
+									>git checkout -b &lt;branch name&gt; origin/&lt;branch
+									name&gt;</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout -b &lt;branch name&gt; origin/&lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Rename local branch</div>
+								<code
+									>git branch -m &lt;old branch name&gt; &lt;new branch
+									name&gt;</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git branch -m &lt;old branch name&gt; &lt;new branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Switch branch</div>
+								<code>git checkout &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Switch to last checked-out branch</div>
+								<code>git checkout -</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout -">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Discard changes in file</div>
+								<code>git checkout -- &lt;file-name.txt&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout -- &lt;file-name.txt&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Delete local branch</div>
+								<code>git branch -d &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git branch -d &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Delete remote branch</div>
+								<code>git push origin --delete &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push origin --delete &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Preview diff before merge</div>
+								<code
+									>git diff &lt;source branch&gt; &lt;target branch&gt;</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git diff &lt;source branch&gt; &lt;target branch&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Merge branch into active branch</div>
+								<code>git merge &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git merge &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Merge source branch into target branch</div>
+								<code
+									>git merge &lt;source branch&gt; &lt;target branch&gt;</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git merge &lt;source branch&gt; &lt;target branch&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Stash local changes</div>
+								<code>git stash</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git stash">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Clear stash entries</div>
+								<code>git stash clear</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git stash clear">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="sharing">
-                <h2>Sharing and Updating Projects</h2>
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">Push branch to remote</div><code>git push origin &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git push origin &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Push and remember branch</div><code>git push -u origin &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git push -u origin &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Push to remembered branch</div><code>git push</code></div><button class="copy-btn" data-copy="git push">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Push all branches</div><code>git push --all</code></div><button class="copy-btn" data-copy="git push --all">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Force push</div><code>git push -f</code></div><button class="copy-btn" data-copy="git push -f">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Delete remote branch</div><code>git push origin --delete &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git push origin --delete &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Update local repository</div><code>git pull</code></div><button class="copy-btn" data-copy="git pull">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Pull specific branch</div><code>git pull origin &lt;branch name&gt;</code></div><button class="copy-btn" data-copy="git pull origin &lt;branch name&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Add remote origin</div><code>git remote add origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code></div><button class="copy-btn" data-copy="git remote add origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Set remote URL to SSH</div><code>git remote set-url origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code></div><button class="copy-btn" data-copy="git remote set-url origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">Copy</button></div>
-                </div>
-            </section>
+				<section id="sharing">
+					<h2>Sharing and Updating Projects</h2>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Push branch to remote</div>
+								<code>git push origin &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push origin &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Push and remember branch</div>
+								<code>git push -u origin &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push -u origin &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Push to remembered branch</div>
+								<code>git push</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Push all branches</div>
+								<code>git push --all</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push --all">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Force push</div>
+								<code>git push -f</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push -f">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Delete remote branch</div>
+								<code>git push origin --delete &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git push origin --delete &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Update local repository</div>
+								<code>git pull</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git pull">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Pull specific branch</div>
+								<code>git pull origin &lt;branch name&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git pull origin &lt;branch name&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Add remote origin</div>
+								<code
+									>git remote add origin
+									ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git remote add origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Set remote URL to SSH</div>
+								<code
+									>git remote set-url origin
+									ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git remote set-url origin ssh://git@github.com/&lt;username&gt;/&lt;repository-name&gt;.git">
+								Copy
+							</button>
+						</div>
+					</div>
+				</section>
 
-            <section id="workflow-deep">
-                <h2>In-Depth Feature Workflow</h2>
-                <p class="desc">This is a full production-friendly workflow from sync to PR, with copyable command blocks.</p>
+				<section id="workflow-deep">
+					<h2>In-Depth Feature Workflow</h2>
+					<p class="desc">
+						This is a full production-friendly workflow from sync to PR, with
+						copyable command blocks.
+					</p>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>1) Sync Main Before Starting</h3>
-                        <button class="copy-btn" data-copy="git checkout main&#10;git pull origin main">Copy Block</button>
-                    </div>
-                    <pre><code>git checkout main
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>1) Sync Main Before Starting</h3>
+							<button
+								class="copy-btn"
+								data-copy="git checkout main&#10;git pull origin main">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git checkout main
 git pull origin main</code></pre>
-                </div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>2) Create and Start Feature Branch</h3>
-                        <button class="copy-btn" data-copy="git checkout -b feature/&lt;short-name&gt;">Copy Block</button>
-                    </div>
-                    <pre><code>git checkout -b feature/&lt;short-name&gt;</code></pre>
-                </div>
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>2) Create and Start Feature Branch</h3>
+							<button
+								class="copy-btn"
+								data-copy="git checkout -b feature/&lt;short-name&gt;">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git checkout -b feature/&lt;short-name&gt;</code></pre>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>3) Commit in Small Units</h3>
-                        <button class="copy-btn" data-copy="git status&#10;git add -A&#10;git commit -m &quot;feat: implement &lt;small change&gt;&quot;">Copy Block</button>
-                    </div>
-                    <pre><code>git status
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>3) Commit in Small Units</h3>
+							<button
+								class="copy-btn"
+								data-copy='git status&#10;git add -A&#10;git commit -m "feat: implement &lt;small change&gt;"'>
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git status
 git add -A
 git commit -m "feat: implement &lt;small change&gt;"</code></pre>
-                </div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>4) Publish Branch and Open PR</h3>
-                        <button class="copy-btn" data-copy="git push -u origin feature/&lt;short-name&gt;">Copy Block</button>
-                    </div>
-                    <pre><code>git push -u origin feature/&lt;short-name&gt;</code></pre>
-                </div>
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>4) Publish Branch and Open PR</h3>
+							<button
+								class="copy-btn"
+								data-copy="git push -u origin feature/&lt;short-name&gt;">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git push -u origin feature/&lt;short-name&gt;</code></pre>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>5) Keep Feature Branch Up To Date</h3>
-                        <button class="copy-btn" data-copy="git checkout main&#10;git pull origin main&#10;git checkout feature/&lt;short-name&gt;&#10;git merge main">Copy Block</button>
-                    </div>
-                    <pre><code>git checkout main
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>5) Keep Feature Branch Up To Date</h3>
+							<button
+								class="copy-btn"
+								data-copy="git checkout main&#10;git pull origin main&#10;git checkout feature/&lt;short-name&gt;&#10;git merge main">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git checkout main
 git pull origin main
 git checkout feature/&lt;short-name&gt;
 git merge main</code></pre>
-                </div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>6) After PR Merge, Clean Up</h3>
-                        <button class="copy-btn" data-copy="git checkout main&#10;git pull origin main&#10;git branch -d feature/&lt;short-name&gt;&#10;git push origin --delete feature/&lt;short-name&gt;">Copy Block</button>
-                    </div>
-                    <pre><code>git checkout main
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>6) After PR Merge, Clean Up</h3>
+							<button
+								class="copy-btn"
+								data-copy="git checkout main&#10;git pull origin main&#10;git branch -d feature/&lt;short-name&gt;&#10;git push origin --delete feature/&lt;short-name&gt;">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git checkout main
 git pull origin main
 git branch -d feature/&lt;short-name&gt;
 git push origin --delete feature/&lt;short-name&gt;</code></pre>
-                </div>
-            </section>
+					</div>
+				</section>
 
-            <section id="conflict-playbook">
-                <h2>Merge Conflict Playbook (In-Depth)</h2>
+				<section id="conflict-playbook">
+					<h2>Merge Conflict Playbook (In-Depth)</h2>
 
-                <div class="cmd-grid">
-                    <div class="cmd-row"><div><div class="desc">Check files with conflicts</div><code>git status</code></div><button class="copy-btn" data-copy="git status">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">List unresolved conflict files only</div><code>git diff --name-only --diff-filter=U</code></div><button class="copy-btn" data-copy="git diff --name-only --diff-filter=U">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Inspect conflict markers in files</div><code>git diff</code></div><button class="copy-btn" data-copy="git diff">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">See commits related to merge conflict</div><code>git log --merge</code></div><button class="copy-btn" data-copy="git log --merge">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Compact conflict-related commit history</div><code>git log --merge --oneline</code></div><button class="copy-btn" data-copy="git log --merge --oneline">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Accept current branch version for one file</div><code>git checkout --ours &lt;file&gt;</code></div><button class="copy-btn" data-copy="git checkout --ours &lt;file&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Accept incoming branch version for one file</div><code>git checkout --theirs &lt;file&gt;</code></div><button class="copy-btn" data-copy="git checkout --theirs &lt;file&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Open visual merge tool if configured</div><code>git mergetool</code></div><button class="copy-btn" data-copy="git mergetool">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Mark resolved files</div><code>git add &lt;file&gt;</code></div><button class="copy-btn" data-copy="git add &lt;file&gt;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Finish merge after resolution</div><code>git commit -m "resolve: merge conflict in &lt;area&gt;"</code></div><button class="copy-btn" data-copy="git commit -m &quot;resolve: merge conflict in &lt;area&gt;&quot;">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Abort merge if needed</div><code>git merge --abort</code></div><button class="copy-btn" data-copy="git merge --abort">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Abort rebase if needed</div><code>git rebase --abort</code></div><button class="copy-btn" data-copy="git rebase --abort">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Skip current patch during rebase conflict</div><code>git rebase --skip</code></div><button class="copy-btn" data-copy="git rebase --skip">Copy</button></div>
-                    <div class="cmd-row"><div><div class="desc">Continue rebase after resolving files</div><code>git rebase --continue</code></div><button class="copy-btn" data-copy="git rebase --continue">Copy</button></div>
-                </div>
+					<div class="cmd-grid">
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Check files with conflicts</div>
+								<code>git status</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git status">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">List unresolved conflict files only</div>
+								<code>git diff --name-only --diff-filter=U</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git diff --name-only --diff-filter=U">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Inspect conflict markers in files</div>
+								<code>git diff</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git diff">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">See commits related to merge conflict</div>
+								<code>git log --merge</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log --merge">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Compact conflict-related commit history</div>
+								<code>git log --merge --oneline</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git log --merge --oneline">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">
+									Accept current branch version for one file
+								</div>
+								<code>git checkout --ours &lt;file&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout --ours &lt;file&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">
+									Accept incoming branch version for one file
+								</div>
+								<code>git checkout --theirs &lt;file&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git checkout --theirs &lt;file&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Open visual merge tool if configured</div>
+								<code>git mergetool</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git mergetool">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Mark resolved files</div>
+								<code>git add &lt;file&gt;</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git add &lt;file&gt;">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Finish merge after resolution</div>
+								<code
+									>git commit -m "resolve: merge conflict in &lt;area&gt;"</code
+								>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy='git commit -m "resolve: merge conflict in &lt;area&gt;"'>
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Abort merge if needed</div>
+								<code>git merge --abort</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git merge --abort">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Abort rebase if needed</div>
+								<code>git rebase --abort</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git rebase --abort">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">
+									Skip current patch during rebase conflict
+								</div>
+								<code>git rebase --skip</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git rebase --skip">
+								Copy
+							</button>
+						</div>
+						<div class="cmd-row">
+							<div>
+								<div class="desc">Continue rebase after resolving files</div>
+								<code>git rebase --continue</code>
+							</div>
+							<button
+								class="copy-btn"
+								data-copy="git rebase --continue">
+								Copy
+							</button>
+						</div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>Fast Conflict Resolution Flow</h3>
-                        <button class="copy-btn" data-copy="git status&#10;git diff&#10;git add &lt;file1&gt; &lt;file2&gt;&#10;git commit -m &quot;resolve: merge conflicts&quot;">Copy Block</button>
-                    </div>
-                    <pre><code>git status
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>Fast Conflict Resolution Flow</h3>
+							<button
+								class="copy-btn"
+								data-copy='git status&#10;git diff&#10;git add &lt;file1&gt; &lt;file2&gt;&#10;git commit -m "resolve: merge conflicts"'>
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git status
 git diff
 git add &lt;file1&gt; &lt;file2&gt;
 git commit -m "resolve: merge conflicts"</code></pre>
-                </div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>Rebase Conflict Resolution Flow</h3>
-                        <button class="copy-btn" data-copy="git status&#10;git diff --name-only --diff-filter=U&#10;git add &lt;file1&gt; &lt;file2&gt;&#10;git rebase --continue">Copy Block</button>
-                    </div>
-                    <pre><code>git status
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>Rebase Conflict Resolution Flow</h3>
+							<button
+								class="copy-btn"
+								data-copy="git status&#10;git diff --name-only --diff-filter=U&#10;git add &lt;file1&gt; &lt;file2&gt;&#10;git rebase --continue">
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git status
 git diff --name-only --diff-filter=U
 git add &lt;file1&gt; &lt;file2&gt;
 git rebase --continue</code></pre>
-                </div>
-            </section>
+					</div>
+				</section>
 
-            <section id="bundles">
-                <h2>Copy-Ready Command Bundles</h2>
+				<section id="bundles">
+					<h2>Copy-Ready Command Bundles</h2>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>Setup Identity</h3>
-                        <button class="copy-btn" data-copy="git config --global user.name &quot;&lt;username&gt;&quot;&#10;git config --global user.email &lt;email address&gt;">Copy Block</button>
-                    </div>
-                    <pre><code>git config --global user.name "&lt;username&gt;"
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>Setup Identity</h3>
+							<button
+								class="copy-btn"
+								data-copy='git config --global user.name "&lt;username&gt;"&#10;git config --global user.email &lt;email address&gt;'>
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git config --global user.name "&lt;username&gt;"
 git config --global user.email &lt;email address&gt;</code></pre>
-                </div>
+					</div>
 
-                <div class="bundle">
-                    <div class="bundle-head">
-                        <h3>Daily Workflow</h3>
-                        <button class="copy-btn" data-copy="git status&#10;git add -A&#10;git commit -m &quot;&lt;commit message&gt;&quot;&#10;git push">Copy Block</button>
-                    </div>
-                    <pre><code>git status
+					<div class="bundle">
+						<div class="bundle-head">
+							<h3>Daily Workflow</h3>
+							<button
+								class="copy-btn"
+								data-copy='git status&#10;git add -A&#10;git commit -m "&lt;commit message&gt;"&#10;git push'>
+								Copy Block
+							</button>
+						</div>
+						<pre><code>git status
 git add -A
 git commit -m "&lt;commit message&gt;"
 git push</code></pre>
-                </div>
-            </section>
+					</div>
+				</section>
 
-            <section id="resources">
-                <h2>Extra Learning Resource</h2>
-                <ul class="resource-list">
-                    <li>GitHub Education PDF: <a href="https://education.github.com/git-cheat-sheet-education.pdf">https://education.github.com/git-cheat-sheet-education.pdf</a></li>
-                    <li>Author: Muhammad Zafar Ul Haq</li>
-                    <li>Project repository: <a href="https://github.com/zafar1162014/GitHub-Workflow-Guide">https://github.com/zafar1162014/GitHub-Workflow-Guide</a></li>
-                </ul>
-            </section>
+				<section id="resources">
+					<h2>Extra Learning Resource</h2>
+					<ul class="resource-list">
+						<li>
+							GitHub Education PDF:
+							<a
+								href="https://education.github.com/git-cheat-sheet-education.pdf"
+								>https://education.github.com/git-cheat-sheet-education.pdf</a
+							>
+						</li>
+						<li>Author: Muhammad Zafar Ul Haq</li>
+						<li>
+							Project repository:
+							<a href="https://github.com/zafar1162014/GitHub-Workflow-Guide"
+								>https://github.com/zafar1162014/GitHub-Workflow-Guide</a
+							>
+						</li>
+					</ul>
+				</section>
 
-            <footer>
-                Updated: 12 April 2026
-            </footer>
-        </main>
-    </div>
+				<footer>Updated: 12 April 2026</footer>
+			</main>
+		</div>
 
-    <script>
-        async function copyText(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(text);
-                return;
-            }
+		<script>
+			async function copyText(text) {
+				if (navigator.clipboard && window.isSecureContext) {
+					await navigator.clipboard.writeText(text);
+					return;
+				}
 
-            const temp = document.createElement("textarea");
-            temp.value = text;
-            temp.style.position = "fixed";
-            temp.style.left = "-9999px";
-            document.body.appendChild(temp);
-            temp.focus();
-            temp.select();
-            document.execCommand("copy");
-            document.body.removeChild(temp);
-        }
+				const temp = document.createElement('textarea');
+				temp.value = text;
+				temp.style.position = 'fixed';
+				temp.style.left = '-9999px';
+				document.body.appendChild(temp);
+				temp.focus();
+				temp.select();
+				document.execCommand('copy');
+				document.body.removeChild(temp);
+			}
 
-        document.querySelectorAll(".copy-btn").forEach((btn) => {
-            btn.addEventListener("click", async () => {
-                const original = btn.textContent;
-                const payload = btn.getAttribute("data-copy") || "";
+			document.querySelectorAll('.copy-btn').forEach((btn) => {
+				btn.addEventListener('click', async () => {
+					const original = btn.textContent;
+					const payload = btn.getAttribute('data-copy') || '';
 
-                try {
-                    await copyText(payload);
-                    btn.textContent = "Copied";
-                    btn.classList.add("success");
-                } catch (err) {
-                    btn.textContent = "Failed";
-                    console.error("Copy failed:", err);
-                }
+					try {
+						await copyText(payload);
+						btn.textContent = 'Copied';
+						btn.classList.add('success');
+					} catch (err) {
+						btn.textContent = 'Failed';
+						console.error('Copy failed:', err);
+					}
 
-                setTimeout(() => {
-                    btn.textContent = original;
-                    btn.classList.remove("success");
-                }, 1200);
-            });
-        });
-    </script>
-</body>
+					setTimeout(() => {
+						btn.textContent = original;
+						btn.classList.remove('success');
+					}, 1200);
+				});
+			});
+		</script>
+	</body>
 </html>
