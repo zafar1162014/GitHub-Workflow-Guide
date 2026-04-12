@@ -118,6 +118,12 @@ Test SSH connection with GitHub.
 ssh -T git@github.com
 ```
 
+Clone a repository over SSH after your key is set up.
+
+```bash
+git clone ssh://git@github.com/<username>/<repository-name>.git
+```
+
 ## Quick Start Workflow
 
 Clone a repo, create a feature branch, commit changes, and push branch to GitHub.
