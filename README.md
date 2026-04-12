@@ -1,98 +1,286 @@
-<h1>Git &amp; GitHub Workflow Guide</h1>
-<p>This guide explains the essential Git commands and workflows in simple, clear steps. Copy the commands directly into your terminal.</p>
+# Git and GitHub Workflow Guide
 
-<h2>Table of Contents</h2>
-<ol>
-  <li><a href="#setup"> Setup &amp; Repository Linking</a></li>
-  <li><a href="#basic"> Basic Commands</a></li>
-  <li><a href="#branches"> Branching &amp; Merging</a></li>
-  <li><a href="#conflicts"> Handling Merge Conflicts</a></li>
-  <li><a href="#practical"> Practical Workflow Example</a></li>
-  <li><a href="#additional"> Additional Commands</a></li>
-  <li><a href="#resources"> Learning Resources</a></li>
-  <li><a href="#conclusion"> Conclusion &amp; Best Practices</a></li>
-</ol>
+An easy, practical, and copy-ready GitHub workflow guide with Git commands, branching, pull request flow, and merge conflict resolution from A to Z.
 
-<h2 id="setup">1. Setup &amp; Repository Linking</h2>
-<h3>🔹 Using HTTPS</h3>
-<pre><code>git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/your-username/my-project.git
-git push -u origin main</code></pre>
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Workflow%20Guide-181717?logo=github)](https://github.com/zafar1162014/GitHub-Workflow-Guide)
+[![Git](https://img.shields.io/badge/Git-Cheat%20Sheet-F05032?logo=git&logoColor=white)](https://git-scm.com/doc)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-<h3>🔹 Using SSH (Recommended)</h3>
-<p>To use SSH instead of HTTPS, follow these steps:</p>
-<pre><code>ssh-keygen -t rsa -b 4096 -C "your-email@example.com"  # Generate SSH key
-eval "$(ssh-agent -s)"                                 # Start SSH agent
-ssh-add ~/.ssh/id_rsa                                  # Add key to SSH agent
-cat ~/.ssh/id_rsa.pub                                  # Copy & add to GitHub SSH settings
-git remote add origin git@github.com:your-username/my-project.git
-git push -u origin main</code></pre>
+Repository: https://github.com/zafar1162014/GitHub-Workflow-Guide  
+Author: Muhammad Zafar Ul Haq
 
-<h2 id="basic">2. Basic Commands</h2>
-<ul>
-  <li><code>git status</code> – Check modified, staged, or untracked files.</li>
-  <li><code>git log</code> – View commit history.</li>
-  <li><code>git diff</code> – See unstaged changes.</li>
-  <li><code>git add [file]</code> – Stage a specific file.</li>
-  <li><code>git commit -m "Your message"</code> – Commit staged changes.</li>
-  <li><code>git pull origin main --allow-unrelated-histories</code> – Merge histories when pulling from another repo.</li>
-</ul>
+---
 
-<h2 id="branches">3. Branching &amp; Merging</h2>
-<h3>✅ Create, List, and Delete Branches</h3>
-<pre><code>git branch <branch_name>       # Create a branch
-git branch                     # List all local branches
-git branch -a                  # List all branches (local & remote)
-git branch -d <branch_name>     # Delete a branch (safe)
-git checkout -b <branch_name>   # Create & switch to a new branch</code></pre>
+## Why This Guide
 
-<h3>✅ Merging & Rebasing</h3>
-<pre><code>git merge <branch_name>         # Merge another branch
-git merge --no-ff <branch_name> # Merge with a commit (no fast-forward)
-git rebase <branch_name>        # Reapply commits on top of another branch</code></pre>
+- Beginner-friendly, fast to scan.
+- Useful for developers, students, and teams.
+- Includes real workflow steps, not just isolated commands.
+- Covers merge/rebase conflict handling in detail.
 
-<h2 id="conflicts">4. Handling Merge Conflicts</h2>
-<h3>✅ Identify & Resolve Conflicts</h3>
-<pre><code>git status                      # Check conflicts
-git diff                        # Show conflicting changes
-git add <conflicted_file>       # Mark as resolved
-git commit                      # Commit the resolution</code></pre>
+## Quick Navigation
 
-<h3>✅ Stash Changes</h3>
-<pre><code>git stash                       # Stash changes before merging
-git stash pop                   # Apply stashed changes after merging</code></pre>
+- [Installation](#installation)
+- [Git Setup](#git-setup)
+- [Create and Clone Repositories](#create-and-clone-repositories)
+- [Daily Git Commands](#daily-git-commands)
+- [Inspect and Compare Changes](#inspect-and-compare-changes)
+- [Undo and Restore](#undo-and-restore)
+- [Branching and Merging](#branching-and-merging)
+- [Sharing and Syncing with Remote](#sharing-and-syncing-with-remote)
+- [In-Depth Feature Workflow](#in-depth-feature-workflow)
+- [Merge Conflict Resolution (A to Z)](#merge-conflict-resolution-a-to-z)
+- [Copy-Ready Command Bundles](#copy-ready-command-bundles)
+- [SEO and Repository Visibility Tips](#seo-and-repository-visibility-tips)
+- [Learning Resource](#learning-resource)
 
-<h2 id="practical">5. Practical Workflow Example</h2>
-<pre><code>git clone git@github.com:your-username/my-project.git  # Clone using SSH
-git add filename.ext
-git commit -m "Update file"
+---
+
+## Installation
+
+- Git download: https://git-scm.com/downloads
+- GitHub Desktop: https://desktop.github.com/
+- Official Git docs: https://git-scm.com/doc
+
+## Git Setup
+
+| Description | Command |
+| --- | --- |
+| Configure author name | `git config --global user.name "<username>"` |
+| Configure author email | `git config --global user.email <email address>` |
+
+## Create and Clone Repositories
+
+| Description | Command |
+| --- | --- |
+| Initialize local repository | `git init` |
+| Clone repository via SSH | `git clone ssh://git@github.com/<username>/<repository-name>.git` |
+
+## Daily Git Commands
+
+| Description | Command |
+| --- | --- |
+| Check status | `git status` |
+| Stage one file | `git add <file-name.txt>` |
+| Stage all changes | `git add -A` or `git add .` |
+| Commit changes | `git commit -m "<commit message>"` |
+| Remove file/folder | `git rm -r <file-name.txt>` |
+
+## Inspect and Compare Changes
+
+| Description | Command |
+| --- | --- |
+| Commit history | `git log` |
+| Detailed history | `git log --summary` |
+| One-line history | `git log --oneline` |
+| Alternative one-line style | `git log --pretty=oneline` |
+| Short style history | `git log --pretty=short` |
+
+## Undo and Restore
+
+| Description | Command |
+| --- | --- |
+| List commits quickly | `git log --oneline` |
+| Checkout old commit | `git checkout <commit id>` |
+| Revert a commit safely | `git revert <commit id>` |
+| Hard reset to commit | `git reset --hard <commit id>` |
+| Stop tracking file/folder | `git rm --cached <file/folder>` |
+| Restore file from Git | `git checkout <file/to/restore>` |
+
+## Branching and Merging
+
+| Description | Command |
+| --- | --- |
+| List local branches | `git branch` |
+| List local and remote branches | `git branch -a` |
+| Create new branch | `git branch <branch name>` |
+| Create and switch branch | `git checkout -b <branch name>` |
+| Track remote branch locally | `git checkout -b <branch name> origin/<branch name>` |
+| Rename branch | `git branch -m <old branch name> <new branch name>` |
+| Switch branch | `git checkout <branch name>` |
+| Switch to last branch | `git checkout -` |
+| Discard file changes | `git checkout -- <file-name.txt>` |
+| Delete local branch | `git branch -d <branch name>` |
+| Delete remote branch | `git push origin --delete <branch name>` |
+| Diff before merge | `git diff <source branch> <target branch>` |
+| Merge into current branch | `git merge <branch name>` |
+| Merge source into target | `git merge <source branch> <target branch>` |
+| Stash current work | `git stash` |
+| Clear all stash entries | `git stash clear` |
+
+## Sharing and Syncing with Remote
+
+| Description | Command |
+| --- | --- |
+| Push branch | `git push origin <branch name>` |
+| Push and set upstream | `git push -u origin <branch name>` |
+| Push current tracked branch | `git push` |
+| Push all branches | `git push --all` |
+| Force push | `git push -f` |
+| Delete remote branch | `git push origin --delete <branch name>` |
+| Pull latest tracked branch | `git pull` |
+| Pull specific branch | `git pull origin <branch name>` |
+| Add remote origin | `git remote add origin ssh://git@github.com/<username>/<repository-name>.git` |
+| Switch origin to SSH URL | `git remote set-url origin ssh://git@github.com/<username>/<repository-name>.git` |
+
+## In-Depth Feature Workflow
+
+### 1. Sync Main Before Starting
+
+```bash
+git checkout main
+git pull origin main
+```
+
+### 2. Create and Start Feature Branch
+
+```bash
+git checkout -b feature/<short-name>
+```
+
+### 3. Commit in Small Units
+
+```bash
+git status
+git add -A
+git commit -m "feat: implement <small change>"
+```
+
+### 4. Publish Branch and Open Pull Request
+
+```bash
+git push -u origin feature/<short-name>
+```
+
+### 5. Keep Feature Branch Updated
+
+```bash
+git checkout main
+git pull origin main
+git checkout feature/<short-name>
+git merge main
+```
+
+### 6. After Merge, Clean Up
+
+```bash
+git checkout main
+git pull origin main
+git branch -d feature/<short-name>
+git push origin --delete feature/<short-name>
+```
+
+## Merge Conflict Resolution (A to Z)
+
+| Step | Command |
+| --- | --- |
+| Show conflict status | `git status` |
+| List unresolved files | `git diff --name-only --diff-filter=U` |
+| View conflict details | `git diff` |
+| Show conflict-related commits | `git log --merge --oneline` |
+| Keep current branch version | `git checkout --ours <file>` |
+| Keep incoming branch version | `git checkout --theirs <file>` |
+| Open visual merge tool | `git mergetool` |
+| Mark resolved file | `git add <file>` |
+| Finalize merge conflict resolution | `git commit -m "resolve: merge conflicts"` |
+| Abort merge | `git merge --abort` |
+| Continue rebase | `git rebase --continue` |
+| Skip one patch in rebase | `git rebase --skip` |
+| Abort rebase | `git rebase --abort` |
+
+### Merge Conflict Fast Flow
+
+```bash
+git status
+git diff --name-only --diff-filter=U
+git diff
+git add <file1> <file2>
+git commit -m "resolve: merge conflicts"
+```
+
+### Rebase Conflict Fast Flow
+
+```bash
+git status
+git diff --name-only --diff-filter=U
+git add <file1> <file2>
+git rebase --continue
+```
+
+## Copy-Ready Command Bundles
+
+### Setup Identity
+
+```bash
+git config --global user.name "<username>"
+git config --global user.email <email address>
+```
+
+### Create or Clone Project
+
+```bash
+git init
+git clone ssh://git@github.com/<username>/<repository-name>.git
+```
+
+### Daily Workflow
+
+```bash
+git status
+git add -A
+git commit -m "<commit message>"
 git push
-git log
-git pull origin main --allow-unrelated-histories  # Include if pulling from a different repo
-git show <commit-hash></code></pre>
+```
 
-<h2 id="additional">6. Additional Commands</h2>
-<ul>
-  <li><code>git commit -m "message" --amend</code> – Modify last commit.</li>
-  <li><code>git log --all --graph</code> – View commits visually.</li>
-  <li><code>git remote -v</code> – List remote repositories.</li>
-</ul>
+### Branch Workflow
 
-<h2 id="resources">7. Learning Resources</h2>
-<ul>
-  <li><a href="https://www.youtube.com/playlist?list=PLeo1K3hjS3usJuxZZUBdjAcilgfQHkRzW" target="_blank">Git &amp; GitHub Tutorials (Codebasics)</a></li>
-  <li><a href="https://youtu.be/apGV9Kg7ics?si=o6KoFjJ1-B8O1omi" target="_blank">Learn Git in Depth (Kunal Kushwaha)</a></li>
-  <li><a href="https://www.coursera.org/learn/introduction-to-version-control" target="_blank">Version Control Course (Meta)</a></li>
-</ul>
+```bash
+git branch <branch name>
+git checkout -b <branch name>
+git checkout <branch name>
+git merge <branch name>
+```
 
-<h2 id="conclusion">8. Conclusion &amp; Best Practices</h2>
-<ul>
-  <li>Use SSH for secure authentication.</li>
-  <li>Write clear commit messages.</li>
-  <li>Use branches for features & fixes.</li>
-  <li>Regularly pull updates.</li>
-  <li>Review pull requests carefully before merging.</li>
-</ul>
-<p style="text-align: right;"> Muhammad Zafar Ul Haq</p>
+### Update from Remote
+
+```bash
+git pull
+git pull origin <branch name>
+```
+
+### Remote Setup and Push
+
+```bash
+git remote add origin ssh://git@github.com/<username>/<repository-name>.git
+git push -u origin <branch name>
+```
+
+### Undo and Restore
+
+```bash
+git log --oneline
+git revert <commit id>
+git reset --hard <commit id>
+git rm --cached <file/folder>
+git checkout <file/to/restore>
+```
+
+## SEO and Repository Visibility Tips
+
+To help this repository rank higher in search results on GitHub and Google:
+
+- Keep repository name and README title aligned with target keywords:
+	Git, GitHub, workflow, cheatsheet, merge conflict, branching.
+- Add topics in GitHub repository settings:
+	`git`, `github`, `git-workflow`, `git-cheatsheet`, `version-control`, `merge-conflicts`.
+- Keep README updated regularly with practical examples.
+- Add a short demo screenshot or GIF in the repository root.
+- Encourage stars and forks by sharing the repository in developer communities.
+
+## Learning Resource
+
+- GitHub Education cheat sheet (PDF): https://education.github.com/git-cheat-sheet-education.pdf
+
+---
+
+If this guide helped you, star the repo and share it with your team.
